@@ -28,7 +28,7 @@ def get_dataloader(X,y,batch_size,key,axis=0):
     indices=jax.random.permutation(key,indices)
     for i in range(0, len(indices),batch_size):
         batch_indices = jnp.array(indices[i: i+batch_size])
-        yield X[:,batch_indices,:], y[:,batch_indices]
+        yield X[batch_indices], y[batch_indices]
 
 
 n_groups = 18
@@ -62,7 +62,7 @@ class MLP(nn.Module):
 model = MLP()
 
 def log_likelihood(params, x, y):
-    logits = jnp.squeeze(jax.vmap(model.apply,(0,0))(params, x))
+    logits = model.apply(params, x).ravel()
     return distrax.Bernoulli(logits=logits).log_prob(y).sum()
 
 def log_prior(params):
@@ -82,8 +82,12 @@ def accuracy_cnn(params, X, y):
     predicted_class = nn.sigmoid(logits)>0.5
     return predicted_class == target_class
 
-full_batch_evaluate=jax.vmap(accuracy_cnn,in_axes=(0,0,0))
-
+def evaluate(params,test_data_loader):
+    acc=list()
+    for i,(X_batch, y_batch) in enumerate(test_data_loader):
+        accuracy_batch=accuracy_cnn(params,X_batch, y_batch)
+        acc.append(accuracy_batch)
+    return jnp.mean(jnp.concatenate(acc))
 
 @partial(jit, static_argnums=(2,3))
 def sgld_kernel(key, params, grad_log_post, dt, X, y_data):
@@ -106,7 +110,7 @@ def sgld(key,log_post, grad_log_post, num_samples,
             key_model, param = sgld_kernel(key_model, param, grad_log_post, dt, X_batch, y_batch)
         loss.append(log_post(param,X_batch,y_batch))
         samples.append(param)
-        test_acc=jnp.mean(full_batch_evaluate(param,test_data[0],test_data[1]))
+        test_acc=jnp.mean(accuracy_cnn(param,test_data[0],test_data[1]))
         accuracy.append(test_acc)
         if (i%(num_samples//10)==0):
             print('iteration {0}, loss {1:.2f}, accuracy {2:.2f}'.format(i,loss[-1],accuracy[-1]))
@@ -118,17 +122,18 @@ def sgd(key,log_post, grad_log_post, num_samples,
     loss=list()
     accuracy=list()
     param = x_0
-    optimizer = optax.sgd(dt,momentum=0.9,nesterov=True)
+    key_train, key_test, key_model = jax.random.split(key, 3)
+    optimizer = optax.sgd(dt)
     opt_state = optimizer.init(param)
     for i in range(num_samples):
-        train_data_loader = get_dataloader(train_data[0],train_data[1],batch_size,key)
+        train_data_loader = get_dataloader(train_data[0],train_data[1],batch_size,key_train)
         for _,(X_batch, y_batch) in enumerate(train_data_loader):
             grads = grad_log_post(param,X_batch,y_batch)
             updates, opt_state = optimizer.update(grads, opt_state)
             param = optax.apply_updates(param, updates)
         loss.append(log_post(param,X_batch,y_batch))
         samples.append(param)
-        test_acc=jnp.mean(full_batch_evaluate(param,test_data[0],test_data[1]))
+        test_acc=jnp.mean(accuracy_cnn(param,test_data[0],test_data[1]))
         accuracy.append(test_acc)
         if (i%(num_samples//10)==0):
             print('iteration {0}, loss {1:.2f}, accuracy {2:.2f}'.format(i,loss[-1],accuracy[-1]))
@@ -137,17 +142,17 @@ def sgd(key,log_post, grad_log_post, num_samples,
 key = jax.random.PRNGKey(2)
 batch = jnp.ones((n_samples, 2))
 key_model_init, key_state_init = jax.random.split(key, 2)
-key_tasks=jax.random.split(key_model_init,n_groups)
-params_tasks = jax.vmap(model.init, (0, None))(key_tasks, batch)
+params=model.init(key_model_init,batch)
 
 batch_size = 10
-train_data=Xs_train,Ys_train
-test_data=Xs_test,Ys_test
+train_data=Xs_train[0,:,:],Ys_train[0,:]
+test_data=Xs_test[0,:,:],Ys_test[0,:]
 
 samples,loss,accuracy=sgd(key_state_init,log_post,
-                            grad_log_post,5_000,1e-3,
-                            params_tasks,train_data,
+                            grad_log_post,3_000,1e-3,
+                            params,train_data,
                             test_data,batch_size)
 
-results=full_batch_evaluate(samples[-1],Xs_test,Ys_test)
+batch_evaluate=jax.vmap(accuracy_cnn,in_axes=(None,0,0))
+results=batch_evaluate(samples[-1],Xs_test,Ys_test)
 print('Test Accuracy {}'.format(jnp.mean(results)))

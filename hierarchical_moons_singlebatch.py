@@ -60,9 +60,14 @@ class MLP(nn.Module):
         return x
 
 model = MLP()
+HalfNormal = distrax.as_distribution(tfd.HalfNormal(1.0))
 
 def log_likelihood(params, x, y):
-    logits = model.apply(params, x).ravel()
+    mu = params['mu']
+    sigma = params['std']
+    eps = params['eps']
+    model_params = jax.tree_map(lambda m,e,s : m+e*s,mu,eps,sigma)
+    logits = model.apply(model_params, x).ravel()
     return distrax.Bernoulli(logits=logits).log_prob(y).sum()
 
 def log_prior(params):
@@ -78,7 +83,12 @@ grad_log_post=jax.jit(jax.grad(log_post))
 @jit
 def accuracy_cnn(params, X, y):
     target_class = y
-    logits=model.apply(params, X).ravel()
+    mu = params['mu']
+    sigma = jnp.exp(params['log_std'])
+    eps = params['eps']
+    model_params = jax.tree_map(lambda m,e,s : m+e*s,mu,eps,sigma)
+
+    logits=model.apply(model_params, X).ravel()
     predicted_class = nn.sigmoid(logits)>0.5
     return predicted_class == target_class
 
@@ -122,11 +132,10 @@ def sgd(key,log_post, grad_log_post, num_samples,
     loss=list()
     accuracy=list()
     param = x_0
-    key_train, key_test, key_model = jax.random.split(key, 3)
     optimizer = optax.sgd(dt)
     opt_state = optimizer.init(param)
     for i in range(num_samples):
-        train_data_loader = get_dataloader(train_data[0],train_data[1],batch_size,key_train)
+        train_data_loader = get_dataloader(train_data[0],train_data[1],batch_size,key)
         for _,(X_batch, y_batch) in enumerate(train_data_loader):
             grads = grad_log_post(param,X_batch,y_batch)
             updates, opt_state = optimizer.update(grads, opt_state)
@@ -142,7 +151,16 @@ def sgd(key,log_post, grad_log_post, num_samples,
 key = jax.random.PRNGKey(2)
 batch = jnp.ones((n_samples, 2))
 key_model_init, key_state_init = jax.random.split(key, 2)
-params=model.init(key_model_init,batch)
+key_mu_init, key_noise_init, key_sigma_init = jax.random.split(key_model_init, 3)
+
+params_mu=model.init(key_mu_init,batch)
+params_noise=jax.tree_map(lambda p: distrax.Normal(0.0,1.0).sample(seed=key_noise_init,sample_shape=p.shape),params_mu)
+params_sigma=jax.tree_map(lambda p: HalfNormal.sample(seed=key_sigma_init,sample_shape=p.shape),params_mu)
+params = {
+        "mu": params_mu,
+        "eps": params_noise,
+        "std": params_sigma,
+    }
 
 batch_size = 10
 train_data=Xs_train[0,:,:],Ys_train[0,:]
@@ -155,9 +173,4 @@ samples,loss,accuracy=sgd(key_state_init,log_post,
 
 batch_evaluate=jax.vmap(accuracy_cnn,in_axes=(None,0,0))
 results=batch_evaluate(samples[-1],Xs_test,Ys_test)
-
-full_batch_evaluate=jax.vmap(accuracy_cnn,in_axes=(0,0,0))
-key_tasks=jax.random.PRNGKey(32)
-key_tasks=jax.random.split(key_tasks,n_groups)
-params_tasks = jax.vmap(model.init, (0, None))(key_tasks, batch)
-#batch_fit=jax.vmap(sgld,in_axes=(0,None,None,None,None,0,0,None))
+print('Test Accuracy {}'.format(jnp.mean(results)))
