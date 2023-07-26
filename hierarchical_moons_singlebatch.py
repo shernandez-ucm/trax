@@ -64,15 +64,20 @@ HalfNormal = distrax.as_distribution(tfd.HalfNormal(1.0))
 
 def log_likelihood(params, x, y):
     mu = params['mu']
-    sigma = params['std']
+    sigma = jax.tree_map(lambda p : jnp.exp(p),params['log_std'])
     eps = params['eps']
     model_params = jax.tree_map(lambda m,e,s : m+e*s,mu,eps,sigma)
     logits = model.apply(model_params, x).ravel()
     return distrax.Bernoulli(logits=logits).log_prob(y).sum()
 
 def log_prior(params):
-    squared_params=jax.tree_map(lambda p: distrax.Normal(0.0,1.0).log_prob(p).sum(), params)
-    return jnp.sum(jnp.stack(jax.tree_util.tree_leaves(squared_params['params'])))
+    squared_mu=jax.tree_map(lambda p: distrax.Normal(0.0,1.0).log_prob(p).sum(), params['mu'])
+    squared_mu=jnp.sum(jnp.stack(jax.tree_util.tree_leaves(squared_mu['params'])))
+    squared_noise=jax.tree_map(lambda p: distrax.Normal(0.0,1.0).log_prob(p).sum(), params['eps'])
+    squared_noise=jnp.sum(jnp.stack(jax.tree_util.tree_leaves(squared_noise['params'])))
+    squared_std=jax.tree_map(lambda p: (distrax.Normal(0.0,1.0).log_prob(p)-jnp.log(p)).sum(), params['log_std'])
+    squared_std=jnp.sum(jnp.stack(jax.tree_util.tree_leaves(squared_std['params'])))
+    return squared_std+squared_noise+squared_mu
 
 def log_post(params,batch,labels):
     n_data=batch.shape[0]
@@ -84,7 +89,7 @@ grad_log_post=jax.jit(jax.grad(log_post))
 def accuracy_cnn(params, X, y):
     target_class = y
     mu = params['mu']
-    sigma = jnp.exp(params['log_std'])
+    sigma = jax.tree_map(lambda p : jnp.exp(p),params['log_std'])
     eps = params['eps']
     model_params = jax.tree_map(lambda m,e,s : m+e*s,mu,eps,sigma)
 
@@ -155,18 +160,18 @@ key_mu_init, key_noise_init, key_sigma_init = jax.random.split(key_model_init, 3
 
 params_mu=model.init(key_mu_init,batch)
 params_noise=jax.tree_map(lambda p: distrax.Normal(0.0,1.0).sample(seed=key_noise_init,sample_shape=p.shape),params_mu)
-params_sigma=jax.tree_map(lambda p: HalfNormal.sample(seed=key_sigma_init,sample_shape=p.shape),params_mu)
+params_sigma=jax.tree_map(lambda p: distrax.Normal(0.0,1.0).sample(seed=key_noise_init,sample_shape=p.shape),params_mu)
 params = {
-        "mu": params_mu,
-        "eps": params_noise,
-        "std": params_sigma,
+        'mu': params_mu,
+        'eps': params_noise,
+        'log_std': params_sigma,
     }
 
 batch_size = 10
 train_data=Xs_train[0,:,:],Ys_train[0,:]
 test_data=Xs_test[0,:,:],Ys_test[0,:]
 
-samples,loss,accuracy=sgd(key_state_init,log_post,
+'''samples,loss,accuracy=sgd(key_state_init,log_post,
                             grad_log_post,3_000,1e-3,
                             params,train_data,
                             test_data,batch_size)
@@ -174,3 +179,4 @@ samples,loss,accuracy=sgd(key_state_init,log_post,
 batch_evaluate=jax.vmap(accuracy_cnn,in_axes=(None,0,0))
 results=batch_evaluate(samples[-1],Xs_test,Ys_test)
 print('Test Accuracy {}'.format(jnp.mean(results)))
+'''
