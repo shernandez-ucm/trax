@@ -63,7 +63,7 @@ model = MLP()
 
 def reparameterize(params):
     mu = params['mu']
-    sigma = jax.tree_map(lambda p : jnp.exp(p),params['log_std'])
+    sigma = jax.tree_map(lambda p : jnp.exp(0.5*p),params['log_std'])
     eps = params['eps']
     model_params = jax.tree_map(lambda m,e,s : m+e*s,mu,eps,sigma)
     return model_params
@@ -105,7 +105,7 @@ def sgld_kernel(key, params, grad_log_post, dt, X, y_data):
     key, subkey = random.split(key, 2)
     grads = grad_log_post(params, X, y_data)
     noise=jax.tree_map(lambda p: random.normal(key=subkey,shape=p.shape), params)
-    params=jax.tree_map(lambda p, g,n: p-0.5*dt*g+jnp.sqrt(dt)*n, params, grads,noise)
+    params=jax.tree_map(lambda p, g,n: p+0.5*dt*g+jnp.sqrt(dt)*n, params, grads,noise)
     return key, params
 
 def sgld(key,log_post, grad_log_post, num_samples,
@@ -166,7 +166,7 @@ batch_size = 10
 train_data=Xs_train,Ys_train
 test_data=Xs_test,Ys_test
 
-samples,loss,accuracy=sgd(key_state_init,log_post,
+samples,loss,accuracy=sgld(key_state_init,log_post,
                             grad_log_post,5_000,1e-3,
                             params_tasks,train_data,
                             test_data,batch_size)

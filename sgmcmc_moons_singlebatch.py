@@ -148,11 +148,11 @@ batch_size = 10
 train_data=Xs_train[0,:,:],Ys_train[0,:]
 test_data=Xs_test[0,:,:],Ys_test[0,:]
 
-samples,loss,accuracy=sgld(key_state_init,log_post,
+samples,loss,accuracy=sgd(key_state_init,log_post,
                             grad_log_post,3_000,1e-3,
                             params,train_data,
                             test_data,batch_size)
 
 batch_evaluate=jax.vmap(accuracy_cnn,in_axes=(None,0,0))
 results=batch_evaluate(samples[-1],Xs_test,Ys_test)
-print('Test Accuracy {}'.format(jnp.mean(results)))
+print('Test Accuracy {0:.2f}'.format(jnp.mean(results)))

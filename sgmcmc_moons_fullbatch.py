@@ -144,7 +144,7 @@ batch_size = 10
 train_data=Xs_train,Ys_train
 test_data=Xs_test,Ys_test
 
-samples,loss,accuracy=sgld(key_state_init,log_post,
+samples,loss,accuracy=sgd(key_state_init,log_post,
                             grad_log_post,10_000,1e-3,
                             params_tasks,train_data,
                             test_data,batch_size)

@@ -63,7 +63,7 @@ model = MLP()
 
 def reparameterize(params):
     mu = params['mu']
-    sigma = jax.tree_map(lambda p : jnp.exp(p),params['log_std'])
+    sigma = jax.tree_map(lambda p : jnp.exp(0.5*p),params['log_std'])
     eps = params['eps']
     model_params = jax.tree_map(lambda m,e,s : m+e*s,mu,eps,sigma)
     return model_params

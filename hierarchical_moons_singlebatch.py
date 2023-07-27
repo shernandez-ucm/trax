@@ -64,7 +64,7 @@ HalfNormal = distrax.as_distribution(tfd.HalfNormal(1.0))
 
 def log_likelihood(params, x, y):
     mu = params['mu']
-    sigma = jax.tree_map(lambda p : jnp.exp(p),params['log_std'])
+    sigma = jax.tree_map(lambda p : jnp.exp(0.5*p),params['log_std'])
     eps = params['eps']
     model_params = jax.tree_map(lambda m,e,s : m+e*s,mu,eps,sigma)
     logits = model.apply(model_params, x).ravel()
@@ -109,8 +109,19 @@ def sgld_kernel(key, params, grad_log_post, dt, X, y_data):
     key, subkey = random.split(key, 2)
     grads = grad_log_post(params, X, y_data)
     noise=jax.tree_map(lambda p: random.normal(key=subkey,shape=p.shape), params)
-    params=jax.tree_map(lambda p, g,n: p-0.5*dt*g+jnp.sqrt(dt)*n, params, grads,noise)
+    params=jax.tree_map(lambda p, g,n: p+0.5*dt*g+jnp.sqrt(dt)*n, params, grads,noise)
     return key, params
+
+@partial(jit, static_argnums=(3,4))
+def sgld_kernel_momemtum(key, params, momemtum,grad_log_post, dt, X, y_data):
+    gamma,eps=0.9,1e-6
+    key, subkey = random.split(key, 2)
+    grads = grad_log_post(params, X, y_data)
+    squared_grads=jax.tree_map(lambda g: jnp.square(g),grads)
+    momemtum=jax.tree_map(lambda m,s : gamma*m+(1-gamma)*s,momemtum,squared_grads)
+    noise=jax.tree_map(lambda p: random.normal(key=subkey,shape=p.shape), params)
+    params=jax.tree_map(lambda p, g,m,n: p-0.5*dt*g/(m+eps)+jnp.sqrt(dt)*n, params, grads,momemtum,noise)
+    return key, params,momemtum
 
 def sgld(key,log_post, grad_log_post, num_samples,
                              dt, x_0,train_data,test_data,batch_size):
@@ -119,10 +130,11 @@ def sgld(key,log_post, grad_log_post, num_samples,
     accuracy=list()
     param = x_0
     key_train, key_model = jax.random.split(key, 2)
+    momemtum=jax.tree_map(lambda p:jnp.zeros_like(p),param)
     for i in range(num_samples):
         train_data_loader = get_dataloader(train_data[0],train_data[1],batch_size,key_train)
         for _,(X_batch, y_batch) in enumerate(train_data_loader):
-            key_model, param = sgld_kernel(key_model, param, grad_log_post, dt, X_batch, y_batch)
+            key_model, param,momemtum = sgld_kernel_momemtum(key_model, param,momemtum, grad_log_post, dt, X_batch, y_batch)
         loss.append(log_post(param,X_batch,y_batch))
         samples.append(param)
         test_acc=jnp.mean(accuracy_cnn(param,test_data[0],test_data[1]))
@@ -160,7 +172,7 @@ key_mu_init, key_noise_init, key_sigma_init = jax.random.split(key_model_init, 3
 
 params_mu=model.init(key_mu_init,batch)
 params_noise=jax.tree_map(lambda p: distrax.Normal(0.0,1.0).sample(seed=key_noise_init,sample_shape=p.shape),params_mu)
-params_sigma=jax.tree_map(lambda p: distrax.Normal(0.0,1.0).sample(seed=key_sigma_init,sample_shape=(1,)),params_mu)
+params_sigma=jax.tree_map(lambda p: distrax.Normal(0.0,1.0).sample(seed=key_sigma_init,sample_shape=p.shape),params_mu)
 params = {
         'mu': params_mu,
         'eps': params_noise,
@@ -171,8 +183,8 @@ batch_size = 10
 train_data=Xs_train[0,:,:],Ys_train[0,:]
 test_data=Xs_test[0,:,:],Ys_test[0,:]
 
-samples,loss,accuracy=sgd(key_state_init,log_post,
-                            grad_log_post,3_000,1e-3,
+samples,loss,accuracy=sgld(key_state_init,log_post,
+                            grad_log_post,5_000,1e-5,
                             params,train_data,
                             test_data,batch_size)
 
