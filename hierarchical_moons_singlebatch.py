@@ -191,3 +191,4 @@ samples,loss,accuracy=sgld(key_state_init,log_post,
 batch_evaluate=jax.vmap(accuracy_cnn,in_axes=(None,0,0))
 results=batch_evaluate(samples[-1],Xs_test,Ys_test)
 print('Test Accuracy {}'.format(jnp.mean(results)))
+agg_res=jnp.stack([jnp.mean(results[i]) for i in range(len(results))])
