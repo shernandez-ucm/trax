@@ -93,6 +93,17 @@ def sgld_kernel(key, params, grad_log_post, dt, X, y_data):
     params=jax.tree_map(lambda p, g,n: p-0.5*dt*g+jnp.sqrt(dt)*n, params, grads,noise)
     return key, params
 
+@partial(jit, static_argnums=(3,4))
+def sgld_kernel_momemtum(key, params, momemtum,grad_log_post, dt, X, y_data):
+    gamma,eps=0.9,1e-6
+    key, subkey = random.split(key, 2)
+    grads = grad_log_post(params, X, y_data)
+    squared_grads=jax.tree_map(lambda g: jnp.square(g),grads)
+    momemtum=jax.tree_map(lambda m,s : gamma*m+(1-gamma)*s,momemtum,squared_grads)
+    noise=jax.tree_map(lambda p: random.normal(key=subkey,shape=p.shape), params)
+    params=jax.tree_map(lambda p, g,m,n: p-0.5*dt*g/(m+eps)+jnp.sqrt(dt)*n, params, grads,momemtum,noise)
+    return key, params,momemtum
+
 def sgld(key,log_post, grad_log_post, num_samples,
                              dt, x_0,train_data,test_data,batch_size):
     samples = list()
@@ -100,10 +111,11 @@ def sgld(key,log_post, grad_log_post, num_samples,
     accuracy=list()
     param = x_0
     key_train, key_model = jax.random.split(key, 2)
+    momemtum=jax.tree_map(lambda p:jnp.zeros_like(p),param)
     for i in range(num_samples):
         train_data_loader = get_dataloader(train_data[0],train_data[1],batch_size,key_train)
         for _,(X_batch, y_batch) in enumerate(train_data_loader):
-            key_model, param = sgld_kernel(key_model, param, grad_log_post, dt, X_batch, y_batch)
+            key_model,param,momemtum = sgld_kernel_momemtum(key_model, param,momemtum, grad_log_post, dt, X_batch, y_batch)
         loss.append(log_post(param,X_batch,y_batch))
         samples.append(param)
         test_acc=jnp.mean(full_batch_evaluate(param,test_data[0],test_data[1]))
@@ -144,7 +156,7 @@ batch_size = 10
 train_data=Xs_train,Ys_train
 test_data=Xs_test,Ys_test
 
-samples,loss,accuracy=sgd(key_state_init,log_post,
+samples,loss,accuracy=sgld(key_state_init,log_post,
                             grad_log_post,10_000,1e-3,
                             params_tasks,train_data,
                             test_data,batch_size)
