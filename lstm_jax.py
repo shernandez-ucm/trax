@@ -4,13 +4,6 @@ from flax import linen as nn
 from flax.training import train_state
 from optax import rmsprop
 
-from flax import linen as nn
-import numpy as np
-import jax
-import jax.numpy as jnp
-from functools import partial
-import flax
-from flax import linen as nn
 
 def generate_time_series(batch_size, n_steps):
     freq1, freq2, offsets1, offsets2 = np.random.rand(4, batch_size, 1)
