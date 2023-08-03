@@ -2,8 +2,8 @@ import jax
 import jax.numpy as jnp
 import numpy as np
 from flax import linen as nn
-from optax import rmsprop
-
+import optax
+import distrax
 
 def generate_time_series(batch_size, n_steps):
     freq1, freq2, offsets1, offsets2 = np.random.rand(4, batch_size, 1)
@@ -14,13 +14,48 @@ def generate_time_series(batch_size, n_steps):
     #return series[..., np.newaxis].astype(np.float32)
     return series
 
-class LSTMModel(nn.Module):
+def get_dataloader(X,y,batch_size,key,axis=0):
+    num_train=X.shape[axis]
+    indices = jnp.array(list(range(0,num_train)))
+    indices=jax.random.permutation(key,indices)
+    for i in range(0, len(indices),batch_size):
+        batch_indices = jnp.array(indices[i: i+batch_size])
+        yield jnp.asarray(X[batch_indices,:]), jnp.asarray(y[batch_indices])
+
+
+class LSTM(nn.Module):
         
     @nn.compact   
     def __call__(self, X_batch):
-        x=nn.RNN(nn.LSTMCell(64))(X_batch)
+        x=nn.RNN(nn.LSTMCell(20))(X_batch)
+        x=nn.RNN(nn.LSTMCell(20))(x)
         x=nn.Dense(10)(x)
         return x
+    
+def log_likelihood(params, x, y):
+    preds = model.apply(params, x)
+    return jnp.mean(optax.l2_loss(y,preds).sum(axis=-1))
+
+grad_log_post=jax.jit(jax.grad(log_likelihood))
+
+def sgd(key,log_post, grad_log_post, num_samples,
+                             dt, x_0,train_data,test_data,batch_size):
+    samples = list()
+    loss=list()
+    param = x_0
+    optimizer = optax.sgd(dt,momentum=0.9,nesterov=True)
+    opt_state = optimizer.init(param)
+    for i in range(num_samples):
+        train_data_loader = get_dataloader(train_data[0],train_data[1],batch_size,key)
+        for _,(X_batch, y_batch) in enumerate(train_data_loader):
+            grads = grad_log_post(param,X_batch,y_batch)
+            updates, opt_state = optimizer.update(grads, opt_state)
+            param = optax.apply_updates(param, updates)
+        loss.append(log_post(param,X_batch,y_batch))
+        samples.append(param)
+        if (i%(num_samples//10)==0):
+            print('iteration {0}, loss {1:.2f}'.format(i,loss[-1]))
+    return samples,loss
 
 
 np.random.seed(42)
@@ -30,20 +65,23 @@ series = generate_time_series(10000, n_steps + 10)
 X_train = series[:7000, :n_steps]
 X_valid = series[7000:9000, :n_steps]
 X_test = series[9000:, :n_steps]
-Y = np.empty((10000, n_steps, 10))
-for step_ahead in range(1, 10 + 1):
-    Y[..., step_ahead - 1] = series[..., step_ahead:step_ahead + n_steps, 0]
-Y_train = Y[:7000]
-Y_valid = Y[7000:9000]
-Y_test = Y[9000:]
+
+Y_train = series[:7000,n_steps:]
+Y_valid = series[7000:9000,n_steps:]
+Y_test = series[9000:,n_steps:]
 
 
 batch_size = 32
 
 key=jax.random.PRNGKey(32)
-inputs = jax.random.randint(key,(batch_size, n_steps),0, 10,)
-#inputs=inputs[:,:,np.newaxis].astype(jnp.float32)
+key_model,key_data=jax.random.split(key,2)
+inputs = jax.random.randint(key,(batch_size, n_steps),0, 10,).astype(jnp.float32)
+train_data=X_train,Y_train
+test_data=X_test,Y_test
+batch_size=32
+num_samples=100
+dt=1e-3
+model=LSTM()
+params=model.init(key,inputs)
 
-#for epoch in range(10):
-#    loss, state = train_state.minimize(model, inputs, state, opt)
-#    print(loss)
+params,loss=sgd(key_data,log_likelihood, grad_log_post, num_samples,dt,params,train_data,test_data,batch_size)
