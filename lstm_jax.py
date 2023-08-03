@@ -24,13 +24,31 @@ def get_dataloader(X,y,batch_size,key,axis=0):
 
 
 class LSTM(nn.Module):
-        
+    
+    @nn.remat    
     @nn.compact   
     def __call__(self, X_batch):
-        x=nn.RNN(nn.LSTMCell(20))(X_batch)
-        x=nn.RNN(nn.LSTMCell(20))(x)
+        carry,x=nn.RNN(nn.LSTMCell(20),return_carry=True)(X_batch)
+        carry,x=nn.RNN(nn.LSTMCell(20),return_carry=True)(x)
         x=nn.Dense(10)(x)
         return x
+    
+class SimpleScan(nn.Module):
+  features: int
+
+  @nn.compact
+  def __call__(self, xs):
+    LSTM = nn.scan(nn.LSTMCell,
+                   in_axes=1, out_axes=1,
+                   variable_broadcast='params',
+                   split_rngs={'params': False})
+    lstm = LSTM(self.features, name="lstm_cell")
+
+    dummy_rng = jax.random.PRNGKey(0)
+    input_shape = xs[:, 0].shape
+    init_carry = lstm.initialize_carry(dummy_rng, input_shape)
+    return lstm(init_carry, xs)
+
     
 def log_likelihood(params, x, y):
     preds = model.apply(params, x)
