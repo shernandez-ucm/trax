@@ -3,7 +3,6 @@ import jax.numpy as jnp
 import numpy as np
 from flax import linen as nn
 import optax
-import distrax
 
 def generate_time_series(batch_size, n_steps):
     freq1, freq2, offsets1, offsets2 = np.random.rand(4, batch_size, 1)
@@ -33,23 +32,7 @@ class LSTM(nn.Module):
         x=nn.Dense(10)(x)
         return x
     
-class SimpleScan(nn.Module):
-  features: int
 
-  @nn.compact
-  def __call__(self, xs):
-    LSTM = nn.scan(nn.LSTMCell,
-                   in_axes=1, out_axes=1,
-                   variable_broadcast='params',
-                   split_rngs={'params': False})
-    lstm = LSTM(self.features, name="lstm_cell")
-
-    dummy_rng = jax.random.PRNGKey(0)
-    input_shape = xs[:, 0].shape
-    init_carry = lstm.initialize_carry(dummy_rng, input_shape)
-    return lstm(init_carry, xs)
-
-    
 def log_likelihood(params, x, y):
     preds = model.apply(params, x)
     return jnp.mean(optax.l2_loss(y,preds).sum(axis=-1))
