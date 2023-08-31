@@ -128,8 +128,7 @@ class LSTM(nn.Module):
     @nn.remat    
     @nn.compact   
     def __call__(self, X_batch):
-        carry,x=nn.RNN(nn.LSTMCell(self.features),return_carry=True)(X_batch)
-        #carry,x=nn.RNN(nn.LSTMCell(self.features//2),return_carry=True)(x)
+        carry,x=nn.RNN(nn.OptimizedLSTMCell(self.features),return_carry=True)(X_batch)
         x=nn.Dense(self.output)(x)
         return x[:,-1,:]
 

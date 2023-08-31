@@ -1,0 +1,1008 @@
+------------------------------------------------------
+# LSTM : 32
+# BATCH : 64
+LR : 1e-5
+iteration 0, loss 0.26
+iteration 5, loss 0.62
+iteration 10, loss 0.34
+iteration 15, loss 0.41
+iteration 20, loss 0.62
+iteration 25, loss 1.63
+iteration 30, loss 0.16
+iteration 35, loss 0.29
+iteration 40, loss 0.68
+iteration 45, loss 0.74
+task : Aotizhongxin, RMSE : 0.24, MAE :0.28, R2 :0.64
+task : Changping, RMSE : 0.25, MAE :0.27, R2 :0.58
+task : Dingling, RMSE : 0.19, MAE :0.24, R2 :0.71
+task : Dongsi, RMSE : 0.28, MAE :0.29, R2 :0.62
+task : Guanyuan, RMSE : 0.27, MAE :0.29, R2 :0.63
+task : Gucheng, RMSE : 0.30, MAE :0.30, R2 :0.58
+task : Huairou, RMSE : 0.21, MAE :0.24, R2 :0.65
+task : Nongzhanguan, RMSE : 0.24, MAE :0.27, R2 :0.62
+task : Shunyi, RMSE : 0.26, MAE :0.28, R2 :0.59
+task : Tiantan, RMSE : 0.25, MAE :0.29, R2 :0.64
+task : Wanliu, RMSE : 0.22, MAE :0.26, R2 :0.66
+task : Wanshouxigong, RMSE : 0.27, MAE :0.29, R2 :0.62
+RMSE : 0.25, MAE :0.27, R2 :0.63
+-------------------------------------------------------
+-------------------------------------------------------
+# LSTM : 32
+# BATCH : 64
+LR : 3e-5
+iteration 0, loss 0.22
+iteration 5, loss 0.56
+iteration 10, loss 0.33
+iteration 15, loss 0.40
+iteration 20, loss 0.61
+iteration 25, loss 1.50
+iteration 30, loss 0.15
+iteration 35, loss 0.28
+iteration 40, loss 0.65
+iteration 45, loss 0.74
+task : Aotizhongxin, RMSE : 0.25, MAE :0.28, R2 :0.61
+task : Changping, RMSE : 0.25, MAE :0.27, R2 :0.60
+task : Dingling, RMSE : 0.20, MAE :0.24, R2 :0.69
+task : Dongsi, RMSE : 0.28, MAE :0.29, R2 :0.59
+task : Guanyuan, RMSE : 0.27, MAE :0.29, R2 :0.65
+task : Gucheng, RMSE : 0.31, MAE :0.30, R2 :0.55
+task : Huairou, RMSE : 0.22, MAE :0.25, R2 :0.63
+task : Nongzhanguan, RMSE : 0.24, MAE :0.27, R2 :0.62
+task : Shunyi, RMSE : 0.26, MAE :0.28, R2 :0.59
+task : Tiantan, RMSE : 0.25, MAE :0.29, R2 :0.62
+task : Wanliu, RMSE : 0.22, MAE :0.26, R2 :0.65
+task : Wanshouxigong, RMSE : 0.28, MAE :0.30, R2 :0.60
+RMSE : 0.25, MAE :0.28, R2 :0.62
+-------------------------------------------------------
+-------------------------------------------------------
+# LSTM : 32
+# BATCH : 64
+LR : 7e-5
+iteration 0, loss 0.20
+iteration 5, loss 0.56
+iteration 10, loss 0.32
+iteration 15, loss 0.37
+iteration 20, loss 0.62
+iteration 25, loss 1.55
+iteration 30, loss 0.14
+iteration 35, loss 0.27
+iteration 40, loss 0.68
+iteration 45, loss 0.72
+task : Aotizhongxin, RMSE : 0.26, MAE :0.28, R2 :0.60
+task : Changping, RMSE : 0.24, MAE :0.27, R2 :0.60
+task : Dingling, RMSE : 0.22, MAE :0.24, R2 :0.66
+task : Dongsi, RMSE : 0.28, MAE :0.29, R2 :0.59
+task : Guanyuan, RMSE : 0.27, MAE :0.29, R2 :0.65
+task : Gucheng, RMSE : 0.31, MAE :0.31, R2 :0.57
+task : Huairou, RMSE : 0.22, MAE :0.25, R2 :0.62
+task : Nongzhanguan, RMSE : 0.25, MAE :0.28, R2 :0.57
+task : Shunyi, RMSE : 0.26, MAE :0.28, R2 :0.57
+task : Tiantan, RMSE : 0.25, MAE :0.29, R2 :0.61
+task : Wanliu, RMSE : 0.23, MAE :0.27, R2 :0.62
+task : Wanshouxigong, RMSE : 0.28, MAE :0.30, R2 :0.61
+RMSE : 0.25, MAE :0.28, R2 :0.61
+-------------------------------------------------------
+-------------------------------------------------------
+# LSTM : 32
+# BATCH : 64
+LR : 10e-5
+iteration 0, loss 0.19
+iteration 5, loss 0.55
+iteration 10, loss 0.32
+iteration 15, loss 0.38
+iteration 20, loss 0.61
+iteration 25, loss 1.58
+iteration 30, loss 0.14
+iteration 35, loss 0.26
+iteration 40, loss 0.68
+iteration 45, loss 0.73
+task : Aotizhongxin, RMSE : 0.25, MAE :0.29, R2 :0.62
+task : Changping, RMSE : 0.25, MAE :0.27, R2 :0.58
+task : Dingling, RMSE : 0.20, MAE :0.24, R2 :0.70
+task : Dongsi, RMSE : 0.29, MAE :0.30, R2 :0.57
+task : Guanyuan, RMSE : 0.27, MAE :0.30, R2 :0.65
+task : Gucheng, RMSE : 0.31, MAE :0.31, R2 :0.53
+task : Huairou, RMSE : 0.22, MAE :0.25, R2 :0.61
+task : Nongzhanguan, RMSE : 0.26, MAE :0.28, R2 :0.57
+task : Shunyi, RMSE : 0.26, MAE :0.28, R2 :0.59
+task : Tiantan, RMSE : 0.25, MAE :0.29, R2 :0.63
+task : Wanliu, RMSE : 0.23, MAE :0.27, R2 :0.63
+task : Wanshouxigong, RMSE : 0.30, MAE :0.31, R2 :0.53
+RMSE : 0.26, MAE :0.28, R2 :0.60
+-------------------------------------------------------
+-------------------------------------------------------
+# LSTM : 32
+# BATCH : 128
+LR : 1e-5
+iteration 0, loss 0.24
+iteration 5, loss 0.61
+iteration 10, loss 0.33
+iteration 15, loss 0.40
+iteration 20, loss 0.58
+iteration 25, loss 1.60
+iteration 30, loss 0.14
+iteration 35, loss 0.29
+iteration 40, loss 0.64
+iteration 45, loss 0.73
+task : Aotizhongxin, RMSE : 0.25, MAE :0.28, R2 :0.63
+task : Changping, RMSE : 0.24, MAE :0.27, R2 :0.58
+task : Dingling, RMSE : 0.19, MAE :0.24, R2 :0.70
+task : Dongsi, RMSE : 0.28, MAE :0.29, R2 :0.60
+task : Guanyuan, RMSE : 0.26, MAE :0.29, R2 :0.65
+task : Gucheng, RMSE : 0.30, MAE :0.30, R2 :0.57
+task : Huairou, RMSE : 0.21, MAE :0.25, R2 :0.63
+task : Nongzhanguan, RMSE : 0.24, MAE :0.27, R2 :0.61
+task : Shunyi, RMSE : 0.26, MAE :0.28, R2 :0.58
+task : Tiantan, RMSE : 0.25, MAE :0.29, R2 :0.64
+task : Wanliu, RMSE : 0.22, MAE :0.27, R2 :0.66
+task : Wanshouxigong, RMSE : 0.28, MAE :0.30, R2 :0.62
+RMSE : 0.25, MAE :0.28, R2 :0.62
+-------------------------------------------------------
+-------------------------------------------------------
+# LSTM : 32
+# BATCH : 128
+LR : 3e-5
+iteration 0, loss 0.20
+iteration 5, loss 0.54
+iteration 10, loss 0.31
+iteration 15, loss 0.38
+iteration 20, loss 0.55
+iteration 25, loss 1.47
+iteration 30, loss 0.13
+iteration 35, loss 0.27
+iteration 40, loss 0.61
+iteration 45, loss 0.71
+task : Aotizhongxin, RMSE : 0.25, MAE :0.29, R2 :0.61
+task : Changping, RMSE : 0.24, MAE :0.27, R2 :0.61
+task : Dingling, RMSE : 0.20, MAE :0.24, R2 :0.69
+task : Dongsi, RMSE : 0.28, MAE :0.29, R2 :0.58
+task : Guanyuan, RMSE : 0.27, MAE :0.30, R2 :0.64
+task : Gucheng, RMSE : 0.32, MAE :0.32, R2 :0.55
+task : Huairou, RMSE : 0.21, MAE :0.25, R2 :0.63
+task : Nongzhanguan, RMSE : 0.24, MAE :0.28, R2 :0.60
+task : Shunyi, RMSE : 0.27, MAE :0.28, R2 :0.55
+task : Tiantan, RMSE : 0.26, MAE :0.29, R2 :0.60
+task : Wanliu, RMSE : 0.23, MAE :0.28, R2 :0.62
+task : Wanshouxigong, RMSE : 0.28, MAE :0.30, R2 :0.60
+RMSE : 0.26, MAE :0.28, R2 :0.61
+-------------------------------------------------------
+-------------------------------------------------------
+# LSTM : 32
+# BATCH : 128
+LR : 7e-5
+iteration 0, loss 0.17
+iteration 5, loss 0.51
+iteration 10, loss 0.30
+iteration 15, loss 0.37
+iteration 20, loss 0.54
+iteration 25, loss 1.50
+iteration 30, loss 0.13
+iteration 35, loss 0.25
+iteration 40, loss 0.59
+iteration 45, loss 0.70
+task : Aotizhongxin, RMSE : 0.26, MAE :0.29, R2 :0.60
+task : Changping, RMSE : 0.24, MAE :0.27, R2 :0.63
+task : Dingling, RMSE : 0.20, MAE :0.24, R2 :0.69
+task : Dongsi, RMSE : 0.28, MAE :0.29, R2 :0.59
+task : Guanyuan, RMSE : 0.27, MAE :0.30, R2 :0.65
+task : Gucheng, RMSE : 0.32, MAE :0.32, R2 :0.55
+task : Huairou, RMSE : 0.21, MAE :0.25, R2 :0.64
+task : Nongzhanguan, RMSE : 0.25, MAE :0.28, R2 :0.59
+task : Shunyi, RMSE : 0.27, MAE :0.28, R2 :0.56
+task : Tiantan, RMSE : 0.26, MAE :0.30, R2 :0.58
+task : Wanliu, RMSE : 0.23, MAE :0.28, R2 :0.62
+task : Wanshouxigong, RMSE : 0.28, MAE :0.30, R2 :0.58
+RMSE : 0.26, MAE :0.28, R2 :0.61
+-------------------------------------------------------
+-------------------------------------------------------
+# LSTM : 32
+# BATCH : 128
+LR : 10e-5
+iteration 0, loss 0.15
+iteration 5, loss 0.50
+iteration 10, loss 0.30
+iteration 15, loss 0.36
+iteration 20, loss 0.55
+iteration 25, loss 1.44
+iteration 30, loss 0.13
+iteration 35, loss 0.25
+iteration 40, loss 0.59
+iteration 45, loss 0.70
+task : Aotizhongxin, RMSE : 0.26, MAE :0.29, R2 :0.59
+task : Changping, RMSE : 0.25, MAE :0.28, R2 :0.59
+task : Dingling, RMSE : 0.21, MAE :0.25, R2 :0.68
+task : Dongsi, RMSE : 0.28, MAE :0.30, R2 :0.59
+task : Guanyuan, RMSE : 0.27, MAE :0.30, R2 :0.66
+task : Gucheng, RMSE : 0.33, MAE :0.32, R2 :0.48
+task : Huairou, RMSE : 0.22, MAE :0.25, R2 :0.61
+task : Nongzhanguan, RMSE : 0.25, MAE :0.28, R2 :0.57
+task : Shunyi, RMSE : 0.27, MAE :0.29, R2 :0.56
+task : Tiantan, RMSE : 0.25, MAE :0.29, R2 :0.60
+task : Wanliu, RMSE : 0.24, MAE :0.29, R2 :0.60
+task : Wanshouxigong, RMSE : 0.28, MAE :0.30, R2 :0.57
+RMSE : 0.26, MAE :0.29, R2 :0.59
+-------------------------------------------------------
+-------------------------------------------------------
+# LSTM : 32
+# BATCH : 256
+LR : 1e-5
+iteration 0, loss 1.06
+iteration 5, loss 0.58
+iteration 10, loss 0.48
+iteration 15, loss 0.50
+iteration 20, loss 0.62
+iteration 25, loss 0.84
+iteration 30, loss 0.88
+iteration 35, loss 0.82
+iteration 40, loss 0.64
+iteration 45, loss 0.67
+task : Aotizhongxin, RMSE : 0.24, MAE :0.28, R2 :0.64
+task : Changping, RMSE : 0.24, MAE :0.27, R2 :0.60
+task : Dingling, RMSE : 0.20, MAE :0.24, R2 :0.70
+task : Dongsi, RMSE : 0.28, MAE :0.29, R2 :0.59
+task : Guanyuan, RMSE : 0.27, MAE :0.29, R2 :0.63
+task : Gucheng, RMSE : 0.29, MAE :0.29, R2 :0.62
+task : Huairou, RMSE : 0.21, MAE :0.25, R2 :0.61
+task : Nongzhanguan, RMSE : 0.24, MAE :0.27, R2 :0.63
+task : Shunyi, RMSE : 0.26, MAE :0.28, R2 :0.58
+task : Tiantan, RMSE : 0.24, MAE :0.28, R2 :0.65
+task : Wanliu, RMSE : 0.22, MAE :0.26, R2 :0.66
+task : Wanshouxigong, RMSE : 0.27, MAE :0.30, R2 :0.61
+RMSE : 0.25, MAE :0.27, R2 :0.63
+-------------------------------------------------------
+-------------------------------------------------------
+# LSTM : 32
+# BATCH : 256
+LR : 3e-5
+iteration 0, loss 0.63
+iteration 5, loss 0.54
+iteration 10, loss 0.48
+iteration 15, loss 0.49
+iteration 20, loss 0.62
+iteration 25, loss 0.82
+iteration 30, loss 0.86
+iteration 35, loss 0.80
+iteration 40, loss 0.63
+iteration 45, loss 0.65
+task : Aotizhongxin, RMSE : 0.24, MAE :0.28, R2 :0.63
+task : Changping, RMSE : 0.24, MAE :0.27, R2 :0.60
+task : Dingling, RMSE : 0.20, MAE :0.24, R2 :0.69
+task : Dongsi, RMSE : 0.28, MAE :0.29, R2 :0.58
+task : Guanyuan, RMSE : 0.27, MAE :0.30, R2 :0.61
+task : Gucheng, RMSE : 0.30, MAE :0.30, R2 :0.57
+task : Huairou, RMSE : 0.21, MAE :0.25, R2 :0.62
+task : Nongzhanguan, RMSE : 0.24, MAE :0.28, R2 :0.62
+task : Shunyi, RMSE : 0.26, MAE :0.28, R2 :0.57
+task : Tiantan, RMSE : 0.24, MAE :0.29, R2 :0.64
+task : Wanliu, RMSE : 0.22, MAE :0.26, R2 :0.64
+task : Wanshouxigong, RMSE : 0.28, MAE :0.30, R2 :0.60
+RMSE : 0.25, MAE :0.28, R2 :0.61
+-------------------------------------------------------
+-------------------------------------------------------
+# LSTM : 32
+# BATCH : 256
+LR : 7e-5
+iteration 0, loss 0.60
+iteration 5, loss 0.52
+iteration 10, loss 0.48
+iteration 15, loss 0.49
+iteration 20, loss 0.63
+iteration 25, loss 0.82
+iteration 30, loss 0.86
+iteration 35, loss 0.79
+iteration 40, loss 0.64
+iteration 45, loss 0.65
+task : Aotizhongxin, RMSE : 0.24, MAE :0.28, R2 :0.62
+task : Changping, RMSE : 0.24, MAE :0.27, R2 :0.60
+task : Dingling, RMSE : 0.21, MAE :0.24, R2 :0.66
+task : Dongsi, RMSE : 0.28, MAE :0.29, R2 :0.58
+task : Guanyuan, RMSE : 0.26, MAE :0.30, R2 :0.63
+task : Gucheng, RMSE : 0.31, MAE :0.30, R2 :0.53
+task : Huairou, RMSE : 0.21, MAE :0.25, R2 :0.61
+task : Nongzhanguan, RMSE : 0.24, MAE :0.28, R2 :0.61
+task : Shunyi, RMSE : 0.26, MAE :0.28, R2 :0.56
+task : Tiantan, RMSE : 0.24, MAE :0.29, R2 :0.64
+task : Wanliu, RMSE : 0.22, MAE :0.26, R2 :0.63
+task : Wanshouxigong, RMSE : 0.28, MAE :0.30, R2 :0.58
+RMSE : 0.25, MAE :0.28, R2 :0.60
+-------------------------------------------------------
+-------------------------------------------------------
+# LSTM : 32
+# BATCH : 256
+LR : 10e-5
+iteration 0, loss 0.59
+iteration 5, loss 0.52
+iteration 10, loss 0.48
+iteration 15, loss 0.49
+iteration 20, loss 0.62
+iteration 25, loss 0.82
+iteration 30, loss 0.85
+iteration 35, loss 0.80
+iteration 40, loss 0.64
+iteration 45, loss 0.64
+task : Aotizhongxin, RMSE : 0.25, MAE :0.28, R2 :0.60
+task : Changping, RMSE : 0.24, MAE :0.26, R2 :0.62
+task : Dingling, RMSE : 0.20, MAE :0.24, R2 :0.67
+task : Dongsi, RMSE : 0.28, MAE :0.29, R2 :0.57
+task : Guanyuan, RMSE : 0.28, MAE :0.30, R2 :0.57
+task : Gucheng, RMSE : 0.31, MAE :0.30, R2 :0.54
+task : Huairou, RMSE : 0.21, MAE :0.25, R2 :0.60
+task : Nongzhanguan, RMSE : 0.24, MAE :0.28, R2 :0.59
+task : Shunyi, RMSE : 0.26, MAE :0.28, R2 :0.56
+task : Tiantan, RMSE : 0.25, MAE :0.29, R2 :0.63
+task : Wanliu, RMSE : 0.22, MAE :0.26, R2 :0.61
+task : Wanshouxigong, RMSE : 0.28, MAE :0.31, R2 :0.57
+RMSE : 0.25, MAE :0.28, R2 :0.60
+-------------------------------------------------------
+-------------------------------------------------------
+# LSTM : 64
+# BATCH : 64
+LR : 1e-5
+iteration 0, loss 0.25
+iteration 5, loss 0.58
+iteration 10, loss 0.32
+iteration 15, loss 0.41
+iteration 20, loss 0.56
+iteration 25, loss 1.57
+iteration 30, loss 0.14
+iteration 35, loss 0.28
+iteration 40, loss 0.64
+iteration 45, loss 0.72
+task : Aotizhongxin, RMSE : 0.25, MAE :0.28, R2 :0.62
+task : Changping, RMSE : 0.24, MAE :0.27, R2 :0.61
+task : Dingling, RMSE : 0.20, MAE :0.24, R2 :0.69
+task : Dongsi, RMSE : 0.28, MAE :0.29, R2 :0.58
+task : Guanyuan, RMSE : 0.27, MAE :0.30, R2 :0.64
+task : Gucheng, RMSE : 0.31, MAE :0.30, R2 :0.56
+task : Huairou, RMSE : 0.21, MAE :0.24, R2 :0.63
+task : Nongzhanguan, RMSE : 0.25, MAE :0.27, R2 :0.61
+task : Shunyi, RMSE : 0.27, MAE :0.28, R2 :0.58
+task : Tiantan, RMSE : 0.25, MAE :0.29, R2 :0.61
+task : Wanliu, RMSE : 0.22, MAE :0.26, R2 :0.66
+task : Wanshouxigong, RMSE : 0.28, MAE :0.30, R2 :0.58
+RMSE : 0.25, MAE :0.28, R2 :0.61
+-------------------------------------------------------
+-------------------------------------------------------
+# LSTM : 64
+# BATCH : 64
+LR : 3e-5
+iteration 0, loss 0.20
+iteration 5, loss 0.54
+iteration 10, loss 0.31
+iteration 15, loss 0.39
+iteration 20, loss 0.56
+iteration 25, loss 1.47
+iteration 30, loss 0.13
+iteration 35, loss 0.28
+iteration 40, loss 0.63
+iteration 45, loss 0.71
+task : Aotizhongxin, RMSE : 0.25, MAE :0.28, R2 :0.60
+task : Changping, RMSE : 0.25, MAE :0.27, R2 :0.60
+task : Dingling, RMSE : 0.20, MAE :0.24, R2 :0.70
+task : Dongsi, RMSE : 0.29, MAE :0.30, R2 :0.54
+task : Guanyuan, RMSE : 0.28, MAE :0.30, R2 :0.61
+task : Gucheng, RMSE : 0.32, MAE :0.31, R2 :0.53
+task : Huairou, RMSE : 0.21, MAE :0.25, R2 :0.62
+task : Nongzhanguan, RMSE : 0.25, MAE :0.28, R2 :0.60
+task : Shunyi, RMSE : 0.27, MAE :0.28, R2 :0.58
+task : Tiantan, RMSE : 0.26, MAE :0.29, R2 :0.57
+task : Wanliu, RMSE : 0.23, MAE :0.27, R2 :0.63
+task : Wanshouxigong, RMSE : 0.29, MAE :0.30, R2 :0.57
+RMSE : 0.26, MAE :0.28, R2 :0.60
+-------------------------------------------------------
+-------------------------------------------------------
+# LSTM : 64
+# BATCH : 64
+LR : 7e-5
+iteration 0, loss 0.18
+iteration 5, loss 0.55
+iteration 10, loss 0.31
+iteration 15, loss 0.39
+iteration 20, loss 0.56
+iteration 25, loss 1.51
+iteration 30, loss 0.14
+iteration 35, loss 0.28
+iteration 40, loss 0.64
+iteration 45, loss 0.70
+task : Aotizhongxin, RMSE : 0.25, MAE :0.29, R2 :0.62
+task : Changping, RMSE : 0.24, MAE :0.27, R2 :0.61
+task : Dingling, RMSE : 0.23, MAE :0.25, R2 :0.62
+task : Dongsi, RMSE : 0.30, MAE :0.30, R2 :0.55
+task : Guanyuan, RMSE : 0.27, MAE :0.30, R2 :0.65
+task : Gucheng, RMSE : 0.31, MAE :0.30, R2 :0.52
+task : Huairou, RMSE : 0.21, MAE :0.25, R2 :0.64
+task : Nongzhanguan, RMSE : 0.25, MAE :0.28, R2 :0.59
+task : Shunyi, RMSE : 0.26, MAE :0.28, R2 :0.56
+task : Tiantan, RMSE : 0.26, MAE :0.29, R2 :0.59
+task : Wanliu, RMSE : 0.23, MAE :0.27, R2 :0.61
+task : Wanshouxigong, RMSE : 0.28, MAE :0.30, R2 :0.61
+RMSE : 0.26, MAE :0.28, R2 :0.60
+-------------------------------------------------------
+-------------------------------------------------------
+# LSTM : 64
+# BATCH : 64
+LR : 10e-5
+iteration 0, loss 0.19
+iteration 5, loss 0.54
+iteration 10, loss 0.31
+iteration 15, loss 0.38
+iteration 20, loss 0.58
+iteration 25, loss 1.42
+iteration 30, loss 0.14
+iteration 35, loss 0.27
+iteration 40, loss 0.68
+iteration 45, loss 0.72
+task : Aotizhongxin, RMSE : 0.25, MAE :0.29, R2 :0.61
+task : Changping, RMSE : 0.25, MAE :0.27, R2 :0.59
+task : Dingling, RMSE : 0.20, MAE :0.25, R2 :0.71
+task : Dongsi, RMSE : 0.29, MAE :0.30, R2 :0.58
+task : Guanyuan, RMSE : 0.27, MAE :0.30, R2 :0.64
+task : Gucheng, RMSE : 0.32, MAE :0.31, R2 :0.56
+task : Huairou, RMSE : 0.22, MAE :0.25, R2 :0.62
+task : Nongzhanguan, RMSE : 0.25, MAE :0.28, R2 :0.61
+task : Shunyi, RMSE : 0.26, MAE :0.28, R2 :0.60
+task : Tiantan, RMSE : 0.25, MAE :0.29, R2 :0.61
+task : Wanliu, RMSE : 0.23, MAE :0.27, R2 :0.65
+task : Wanshouxigong, RMSE : 0.30, MAE :0.31, R2 :0.54
+RMSE : 0.26, MAE :0.28, R2 :0.61
+-------------------------------------------------------
+-------------------------------------------------------
+# LSTM : 64
+# BATCH : 128
+LR : 1e-5
+iteration 0, loss 0.24
+iteration 5, loss 0.56
+iteration 10, loss 0.31
+iteration 15, loss 0.40
+iteration 20, loss 0.52
+iteration 25, loss 1.44
+iteration 30, loss 0.12
+iteration 35, loss 0.26
+iteration 40, loss 0.59
+iteration 45, loss 0.69
+task : Aotizhongxin, RMSE : 0.25, MAE :0.28, R2 :0.61
+task : Changping, RMSE : 0.24, MAE :0.27, R2 :0.61
+task : Dingling, RMSE : 0.20, MAE :0.24, R2 :0.71
+task : Dongsi, RMSE : 0.29, MAE :0.29, R2 :0.57
+task : Guanyuan, RMSE : 0.28, MAE :0.30, R2 :0.62
+task : Gucheng, RMSE : 0.32, MAE :0.31, R2 :0.54
+task : Huairou, RMSE : 0.21, MAE :0.25, R2 :0.63
+task : Nongzhanguan, RMSE : 0.25, MAE :0.28, R2 :0.59
+task : Shunyi, RMSE : 0.27, MAE :0.28, R2 :0.57
+task : Tiantan, RMSE : 0.26, MAE :0.29, R2 :0.60
+task : Wanliu, RMSE : 0.23, MAE :0.27, R2 :0.61
+task : Wanshouxigong, RMSE : 0.29, MAE :0.30, R2 :0.58
+RMSE : 0.26, MAE :0.28, R2 :0.60
+-------------------------------------------------------
+-------------------------------------------------------
+# LSTM : 64
+# BATCH : 128
+LR : 3e-5
+iteration 0, loss 0.19
+iteration 5, loss 0.48
+iteration 10, loss 0.30
+iteration 15, loss 0.36
+iteration 20, loss 0.49
+iteration 25, loss 1.22
+iteration 30, loss 0.11
+iteration 35, loss 0.26
+iteration 40, loss 0.55
+iteration 45, loss 0.69
+task : Aotizhongxin, RMSE : 0.26, MAE :0.29, R2 :0.62
+task : Changping, RMSE : 0.25, MAE :0.28, R2 :0.62
+task : Dingling, RMSE : 0.20, MAE :0.24, R2 :0.69
+task : Dongsi, RMSE : 0.28, MAE :0.30, R2 :0.57
+task : Guanyuan, RMSE : 0.28, MAE :0.31, R2 :0.63
+task : Gucheng, RMSE : 0.32, MAE :0.31, R2 :0.56
+task : Huairou, RMSE : 0.22, MAE :0.25, R2 :0.62
+task : Nongzhanguan, RMSE : 0.25, MAE :0.28, R2 :0.57
+task : Shunyi, RMSE : 0.27, MAE :0.29, R2 :0.55
+task : Tiantan, RMSE : 0.26, MAE :0.30, R2 :0.60
+task : Wanliu, RMSE : 0.26, MAE :0.29, R2 :0.47
+task : Wanshouxigong, RMSE : 0.30, MAE :0.31, R2 :0.55
+RMSE : 0.26, MAE :0.29, R2 :0.59
+-------------------------------------------------------
+-------------------------------------------------------
+# LSTM : 64
+# BATCH : 128
+LR : 7e-5
+iteration 0, loss 0.16
+iteration 5, loss 0.47
+iteration 10, loss 0.29
+iteration 15, loss 0.35
+iteration 20, loss 0.50
+iteration 25, loss 1.26
+iteration 30, loss 0.12
+iteration 35, loss 0.25
+iteration 40, loss 0.54
+iteration 45, loss 0.68
+task : Aotizhongxin, RMSE : 0.27, MAE :0.30, R2 :0.59
+task : Changping, RMSE : 0.25, MAE :0.28, R2 :0.61
+task : Dingling, RMSE : 0.20, MAE :0.24, R2 :0.69
+task : Dongsi, RMSE : 0.29, MAE :0.30, R2 :0.55
+task : Guanyuan, RMSE : 0.28, MAE :0.31, R2 :0.65
+task : Gucheng, RMSE : 0.33, MAE :0.32, R2 :0.50
+task : Huairou, RMSE : 0.22, MAE :0.26, R2 :0.62
+task : Nongzhanguan, RMSE : 0.25, MAE :0.28, R2 :0.58
+task : Shunyi, RMSE : 0.27, MAE :0.29, R2 :0.57
+task : Tiantan, RMSE : 0.26, MAE :0.30, R2 :0.61
+task : Wanliu, RMSE : 0.24, MAE :0.29, R2 :0.59
+task : Wanshouxigong, RMSE : 0.30, MAE :0.31, R2 :0.53
+RMSE : 0.26, MAE :0.29, R2 :0.59
+-------------------------------------------------------
+-------------------------------------------------------
+# LSTM : 64
+# BATCH : 128
+LR : 10e-5
+iteration 0, loss 0.15
+iteration 5, loss 0.48
+iteration 10, loss 0.30
+iteration 15, loss 0.36
+iteration 20, loss 0.51
+iteration 25, loss 1.26
+iteration 30, loss 0.12
+iteration 35, loss 0.24
+iteration 40, loss 0.59
+iteration 45, loss 0.68
+task : Aotizhongxin, RMSE : 0.26, MAE :0.30, R2 :0.61
+task : Changping, RMSE : 0.25, MAE :0.28, R2 :0.62
+task : Dingling, RMSE : 0.20, MAE :0.24, R2 :0.69
+task : Dongsi, RMSE : 0.32, MAE :0.30, R2 :0.52
+task : Guanyuan, RMSE : 0.28, MAE :0.32, R2 :0.63
+task : Gucheng, RMSE : 0.34, MAE :0.33, R2 :0.49
+task : Huairou, RMSE : 0.22, MAE :0.26, R2 :0.63
+task : Nongzhanguan, RMSE : 0.25, MAE :0.28, R2 :0.58
+task : Shunyi, RMSE : 0.27, MAE :0.29, R2 :0.55
+task : Tiantan, RMSE : 0.26, MAE :0.30, R2 :0.62
+task : Wanliu, RMSE : 0.24, MAE :0.29, R2 :0.58
+task : Wanshouxigong, RMSE : 0.30, MAE :0.31, R2 :0.52
+RMSE : 0.27, MAE :0.29, R2 :0.59
+-------------------------------------------------------
+-------------------------------------------------------
+# LSTM : 64
+# BATCH : 256
+LR : 1e-5
+iteration 0, loss 0.76
+iteration 5, loss 0.55
+iteration 10, loss 0.48
+iteration 15, loss 0.50
+iteration 20, loss 0.61
+iteration 25, loss 0.83
+iteration 30, loss 0.87
+iteration 35, loss 0.81
+iteration 40, loss 0.64
+iteration 45, loss 0.66
+task : Aotizhongxin, RMSE : 0.24, MAE :0.28, R2 :0.63
+task : Changping, RMSE : 0.24, MAE :0.27, R2 :0.60
+task : Dingling, RMSE : 0.19, MAE :0.24, R2 :0.71
+task : Dongsi, RMSE : 0.28, MAE :0.29, R2 :0.60
+task : Guanyuan, RMSE : 0.27, MAE :0.30, R2 :0.62
+task : Gucheng, RMSE : 0.29, MAE :0.29, R2 :0.60
+task : Huairou, RMSE : 0.21, MAE :0.25, R2 :0.61
+task : Nongzhanguan, RMSE : 0.24, MAE :0.27, R2 :0.62
+task : Shunyi, RMSE : 0.26, MAE :0.28, R2 :0.59
+task : Tiantan, RMSE : 0.24, MAE :0.28, R2 :0.65
+task : Wanliu, RMSE : 0.22, MAE :0.26, R2 :0.66
+task : Wanshouxigong, RMSE : 0.28, MAE :0.30, R2 :0.60
+RMSE : 0.25, MAE :0.28, R2 :0.62
+-------------------------------------------------------
+-------------------------------------------------------
+# LSTM : 64
+# BATCH : 256
+LR : 3e-5
+iteration 0, loss 0.61
+iteration 5, loss 0.53
+iteration 10, loss 0.47
+iteration 15, loss 0.49
+iteration 20, loss 0.61
+iteration 25, loss 0.81
+iteration 30, loss 0.85
+iteration 35, loss 0.79
+iteration 40, loss 0.64
+iteration 45, loss 0.65
+task : Aotizhongxin, RMSE : 0.24, MAE :0.28, R2 :0.61
+task : Changping, RMSE : 0.24, MAE :0.27, R2 :0.59
+task : Dingling, RMSE : 0.21, MAE :0.24, R2 :0.67
+task : Dongsi, RMSE : 0.28, MAE :0.29, R2 :0.58
+task : Guanyuan, RMSE : 0.27, MAE :0.30, R2 :0.61
+task : Gucheng, RMSE : 0.30, MAE :0.30, R2 :0.57
+task : Huairou, RMSE : 0.21, MAE :0.25, R2 :0.61
+task : Nongzhanguan, RMSE : 0.24, MAE :0.28, R2 :0.61
+task : Shunyi, RMSE : 0.26, MAE :0.28, R2 :0.59
+task : Tiantan, RMSE : 0.25, MAE :0.29, R2 :0.61
+task : Wanliu, RMSE : 0.22, MAE :0.26, R2 :0.64
+task : Wanshouxigong, RMSE : 0.28, MAE :0.30, R2 :0.58
+RMSE : 0.25, MAE :0.28, R2 :0.60
+-------------------------------------------------------
+-------------------------------------------------------
+# LSTM : 64
+# BATCH : 256
+LR : 7e-5
+iteration 0, loss 0.59
+iteration 5, loss 0.52
+iteration 10, loss 0.47
+iteration 15, loss 0.49
+iteration 20, loss 0.61
+iteration 25, loss 0.81
+iteration 30, loss 0.83
+iteration 35, loss 0.80
+iteration 40, loss 0.64
+iteration 45, loss 0.64
+task : Aotizhongxin, RMSE : 0.25, MAE :0.28, R2 :0.58
+task : Changping, RMSE : 0.25, MAE :0.27, R2 :0.59
+task : Dingling, RMSE : 0.20, MAE :0.24, R2 :0.67
+task : Dongsi, RMSE : 0.29, MAE :0.30, R2 :0.55
+task : Guanyuan, RMSE : 0.27, MAE :0.30, R2 :0.60
+task : Gucheng, RMSE : 0.30, MAE :0.30, R2 :0.58
+task : Huairou, RMSE : 0.22, MAE :0.25, R2 :0.60
+task : Nongzhanguan, RMSE : 0.24, MAE :0.28, R2 :0.58
+task : Shunyi, RMSE : 0.27, MAE :0.28, R2 :0.58
+task : Tiantan, RMSE : 0.25, MAE :0.29, R2 :0.63
+task : Wanliu, RMSE : 0.22, MAE :0.26, R2 :0.63
+task : Wanshouxigong, RMSE : 0.28, MAE :0.31, R2 :0.56
+RMSE : 0.25, MAE :0.28, R2 :0.60
+-------------------------------------------------------
+-------------------------------------------------------
+# LSTM : 64
+# BATCH : 256
+LR : 10e-5
+iteration 0, loss 0.58
+iteration 5, loss 0.52
+iteration 10, loss 0.47
+iteration 15, loss 0.49
+iteration 20, loss 0.61
+iteration 25, loss 0.80
+iteration 30, loss 0.84
+iteration 35, loss 0.78
+iteration 40, loss 0.64
+iteration 45, loss 0.64
+task : Aotizhongxin, RMSE : 0.25, MAE :0.28, R2 :0.55
+task : Changping, RMSE : 0.25, MAE :0.27, R2 :0.57
+task : Dingling, RMSE : 0.20, MAE :0.24, R2 :0.66
+task : Dongsi, RMSE : 0.29, MAE :0.30, R2 :0.56
+task : Guanyuan, RMSE : 0.27, MAE :0.30, R2 :0.60
+task : Gucheng, RMSE : 0.30, MAE :0.30, R2 :0.56
+task : Huairou, RMSE : 0.22, MAE :0.26, R2 :0.58
+task : Nongzhanguan, RMSE : 0.24, MAE :0.28, R2 :0.59
+task : Shunyi, RMSE : 0.26, MAE :0.28, R2 :0.61
+task : Tiantan, RMSE : 0.25, MAE :0.29, R2 :0.62
+task : Wanliu, RMSE : 0.23, MAE :0.26, R2 :0.62
+task : Wanshouxigong, RMSE : 0.29, MAE :0.31, R2 :0.53
+RMSE : 0.25, MAE :0.28, R2 :0.59
+-------------------------------------------------------
+-------------------------------------------------------
+# LSTM : 128
+# BATCH : 64
+LR : 1e-5
+iteration 0, loss 0.21
+iteration 5, loss 0.52
+iteration 10, loss 0.30
+iteration 15, loss 0.37
+iteration 20, loss 0.52
+iteration 25, loss 1.41
+iteration 30, loss 0.12
+iteration 35, loss 0.27
+iteration 40, loss 0.60
+iteration 45, loss 0.70
+task : Aotizhongxin, RMSE : 0.25, MAE :0.29, R2 :0.61
+task : Changping, RMSE : 0.26, MAE :0.27, R2 :0.58
+task : Dingling, RMSE : 0.21, MAE :0.24, R2 :0.66
+task : Dongsi, RMSE : 0.29, MAE :0.30, R2 :0.57
+task : Guanyuan, RMSE : 0.29, MAE :0.31, R2 :0.64
+task : Gucheng, RMSE : 0.35, MAE :0.32, R2 :0.51
+task : Huairou, RMSE : 0.22, MAE :0.25, R2 :0.62
+task : Nongzhanguan, RMSE : 0.25, MAE :0.28, R2 :0.61
+task : Shunyi, RMSE : 0.26, MAE :0.28, R2 :0.60
+task : Tiantan, RMSE : 0.27, MAE :0.30, R2 :0.59
+task : Wanliu, RMSE : 0.23, MAE :0.27, R2 :0.65
+task : Wanshouxigong, RMSE : 0.29, MAE :0.30, R2 :0.59
+RMSE : 0.26, MAE :0.28, R2 :0.60
+-------------------------------------------------------
+-------------------------------------------------------
+# LSTM : 128
+# BATCH : 64
+LR : 3e-5
+iteration 0, loss 0.16
+iteration 5, loss 0.49
+iteration 10, loss 0.29
+iteration 15, loss 0.36
+iteration 20, loss 0.53
+iteration 25, loss 1.37
+iteration 30, loss 0.12
+iteration 35, loss 0.27
+iteration 40, loss 0.61
+iteration 45, loss 0.70
+task : Aotizhongxin, RMSE : 0.25, MAE :0.29, R2 :0.59
+task : Changping, RMSE : 0.26, MAE :0.27, R2 :0.59
+task : Dingling, RMSE : 0.20, MAE :0.24, R2 :0.69
+task : Dongsi, RMSE : 0.29, MAE :0.30, R2 :0.56
+task : Guanyuan, RMSE : 0.29, MAE :0.31, R2 :0.64
+task : Gucheng, RMSE : 0.33, MAE :0.31, R2 :0.53
+task : Huairou, RMSE : 0.22, MAE :0.25, R2 :0.63
+task : Nongzhanguan, RMSE : 0.25, MAE :0.28, R2 :0.59
+task : Shunyi, RMSE : 0.27, MAE :0.28, R2 :0.58
+task : Tiantan, RMSE : 0.26, MAE :0.29, R2 :0.62
+task : Wanliu, RMSE : 0.24, MAE :0.28, R2 :0.61
+task : Wanshouxigong, RMSE : 0.28, MAE :0.30, R2 :0.60
+RMSE : 0.26, MAE :0.28, R2 :0.60
+-------------------------------------------------------
+-------------------------------------------------------
+# LSTM : 128
+# BATCH : 64
+LR : 7e-5
+iteration 0, loss 0.14
+iteration 5, loss 0.52
+iteration 10, loss 0.30
+iteration 15, loss 0.38
+iteration 20, loss 0.56
+iteration 25, loss 1.45
+iteration 30, loss 0.13
+iteration 35, loss 0.26
+iteration 40, loss 0.64
+iteration 45, loss 0.71
+task : Aotizhongxin, RMSE : 0.26, MAE :0.29, R2 :0.59
+task : Changping, RMSE : 0.24, MAE :0.27, R2 :0.62
+task : Dingling, RMSE : 0.20, MAE :0.24, R2 :0.69
+task : Dongsi, RMSE : 0.29, MAE :0.30, R2 :0.57
+task : Guanyuan, RMSE : 0.28, MAE :0.30, R2 :0.65
+task : Gucheng, RMSE : 0.33, MAE :0.31, R2 :0.49
+task : Huairou, RMSE : 0.22, MAE :0.25, R2 :0.63
+task : Nongzhanguan, RMSE : 0.25, MAE :0.28, R2 :0.58
+task : Shunyi, RMSE : 0.27, MAE :0.28, R2 :0.58
+task : Tiantan, RMSE : 0.25, MAE :0.29, R2 :0.64
+task : Wanliu, RMSE : 0.23, MAE :0.27, R2 :0.63
+task : Wanshouxigong, RMSE : 0.28, MAE :0.30, R2 :0.58
+RMSE : 0.26, MAE :0.28, R2 :0.60
+-------------------------------------------------------
+-------------------------------------------------------
+# LSTM : 128
+# BATCH : 64
+LR : 10e-5
+iteration 0, loss 0.14
+iteration 5, loss 0.49
+iteration 10, loss 0.30
+iteration 15, loss 0.37
+iteration 20, loss 0.56
+iteration 25, loss 1.51
+iteration 30, loss 0.12
+iteration 35, loss 0.26
+iteration 40, loss 0.63
+iteration 45, loss 0.71
+task : Aotizhongxin, RMSE : 0.26, MAE :0.29, R2 :0.60
+task : Changping, RMSE : 0.25, MAE :0.27, R2 :0.62
+task : Dingling, RMSE : 0.21, MAE :0.25, R2 :0.66
+task : Dongsi, RMSE : 0.30, MAE :0.30, R2 :0.55
+task : Guanyuan, RMSE : 0.27, MAE :0.30, R2 :0.65
+task : Gucheng, RMSE : 0.31, MAE :0.31, R2 :0.53
+task : Huairou, RMSE : 0.22, MAE :0.25, R2 :0.62
+task : Nongzhanguan, RMSE : 0.25, MAE :0.28, R2 :0.57
+task : Shunyi, RMSE : 0.27, MAE :0.28, R2 :0.58
+task : Tiantan, RMSE : 0.25, MAE :0.29, R2 :0.62
+task : Wanliu, RMSE : 0.23, MAE :0.28, R2 :0.65
+task : Wanshouxigong, RMSE : 0.29, MAE :0.31, R2 :0.54
+RMSE : 0.26, MAE :0.28, R2 :0.60
+-------------------------------------------------------
+-------------------------------------------------------
+# LSTM : 128
+# BATCH : 128
+LR : 1e-5
+iteration 0, loss 0.20
+iteration 5, loss 0.50
+iteration 10, loss 0.29
+iteration 15, loss 0.36
+iteration 20, loss 0.44
+iteration 25, loss 1.31
+iteration 30, loss 0.10
+iteration 35, loss 0.23
+iteration 40, loss 0.52
+iteration 45, loss 0.64
+task : Aotizhongxin, RMSE : 0.27, MAE :0.31, R2 :0.58
+task : Changping, RMSE : 0.25, MAE :0.28, R2 :0.61
+task : Dingling, RMSE : 0.21, MAE :0.25, R2 :0.66
+task : Dongsi, RMSE : 0.29, MAE :0.30, R2 :0.56
+task : Guanyuan, RMSE : 0.29, MAE :0.32, R2 :0.60
+task : Gucheng, RMSE : 0.34, MAE :0.33, R2 :0.52
+task : Huairou, RMSE : 0.22, MAE :0.25, R2 :0.64
+task : Nongzhanguan, RMSE : 0.25, MAE :0.29, R2 :0.58
+task : Shunyi, RMSE : 0.27, MAE :0.29, R2 :0.57
+task : Tiantan, RMSE : 0.26, MAE :0.30, R2 :0.60
+task : Wanliu, RMSE : 0.24, MAE :0.28, R2 :0.61
+task : Wanshouxigong, RMSE : 0.29, MAE :0.31, R2 :0.57
+RMSE : 0.27, MAE :0.29, R2 :0.59
+-------------------------------------------------------
+-------------------------------------------------------
+# LSTM : 128
+# BATCH : 128
+LR : 3e-5
+iteration 0, loss 0.15
+iteration 5, loss 0.42
+iteration 10, loss 0.27
+iteration 15, loss 0.34
+iteration 20, loss 0.44
+iteration 25, loss 1.13
+iteration 30, loss 0.09
+iteration 35, loss 0.24
+iteration 40, loss 0.47
+iteration 45, loss 0.64
+task : Aotizhongxin, RMSE : 0.26, MAE :0.31, R2 :0.61
+task : Changping, RMSE : 0.28, MAE :0.29, R2 :0.55
+task : Dingling, RMSE : 0.21, MAE :0.25, R2 :0.66
+task : Dongsi, RMSE : 0.29, MAE :0.30, R2 :0.56
+task : Guanyuan, RMSE : 0.30, MAE :0.34, R2 :0.62
+task : Gucheng, RMSE : 0.34, MAE :0.34, R2 :0.53
+task : Huairou, RMSE : 0.22, MAE :0.25, R2 :0.62
+task : Nongzhanguan, RMSE : 0.26, MAE :0.29, R2 :0.55
+task : Shunyi, RMSE : 0.27, MAE :0.29, R2 :0.56
+task : Tiantan, RMSE : 0.26, MAE :0.30, R2 :0.60
+task : Wanliu, RMSE : 0.25, MAE :0.30, R2 :0.58
+task : Wanshouxigong, RMSE : 0.30, MAE :0.31, R2 :0.56
+RMSE : 0.27, MAE :0.30, R2 :0.58
+-------------------------------------------------------
+-------------------------------------------------------
+# LSTM : 128
+# BATCH : 128
+LR : 7e-5
+iteration 0, loss 0.14
+iteration 5, loss 0.44
+iteration 10, loss 0.28
+iteration 15, loss 0.34
+iteration 20, loss 0.44
+iteration 25, loss 1.15
+iteration 30, loss 0.10
+iteration 35, loss 0.23
+iteration 40, loss 0.54
+iteration 45, loss 0.67
+task : Aotizhongxin, RMSE : 0.26, MAE :0.30, R2 :0.59
+task : Changping, RMSE : 0.25, MAE :0.28, R2 :0.63
+task : Dingling, RMSE : 0.21, MAE :0.24, R2 :0.67
+task : Dongsi, RMSE : 0.29, MAE :0.30, R2 :0.54
+task : Guanyuan, RMSE : 0.30, MAE :0.34, R2 :0.62
+task : Gucheng, RMSE : 0.35, MAE :0.34, R2 :0.52
+task : Huairou, RMSE : 0.22, MAE :0.25, R2 :0.64
+task : Nongzhanguan, RMSE : 0.26, MAE :0.29, R2 :0.56
+task : Shunyi, RMSE : 0.27, MAE :0.29, R2 :0.55
+task : Tiantan, RMSE : 0.26, MAE :0.30, R2 :0.59
+task : Wanliu, RMSE : 0.26, MAE :0.31, R2 :0.57
+task : Wanshouxigong, RMSE : 0.29, MAE :0.30, R2 :0.58
+RMSE : 0.27, MAE :0.30, R2 :0.59
+-------------------------------------------------------
+-------------------------------------------------------
+# LSTM : 128
+# BATCH : 128
+LR : 10e-5
+iteration 0, loss 0.15
+iteration 5, loss 0.45
+iteration 10, loss 0.28
+iteration 15, loss 0.34
+iteration 20, loss 0.46
+iteration 25, loss 1.17
+iteration 30, loss 0.11
+iteration 35, loss 0.24
+iteration 40, loss 0.56
+iteration 45, loss 0.67
+task : Aotizhongxin, RMSE : 0.26, MAE :0.30, R2 :0.58
+task : Changping, RMSE : 0.26, MAE :0.28, R2 :0.60
+task : Dingling, RMSE : 0.21, MAE :0.25, R2 :0.66
+task : Dongsi, RMSE : 0.29, MAE :0.30, R2 :0.53
+task : Guanyuan, RMSE : 0.30, MAE :0.33, R2 :0.61
+task : Gucheng, RMSE : 0.34, MAE :0.33, R2 :0.53
+task : Huairou, RMSE : 0.22, MAE :0.25, R2 :0.63
+task : Nongzhanguan, RMSE : 0.26, MAE :0.29, R2 :0.54
+task : Shunyi, RMSE : 0.27, MAE :0.29, R2 :0.55
+task : Tiantan, RMSE : 0.26, MAE :0.30, R2 :0.61
+task : Wanliu, RMSE : 0.25, MAE :0.30, R2 :0.57
+task : Wanshouxigong, RMSE : 0.30, MAE :0.31, R2 :0.55
+RMSE : 0.27, MAE :0.29, R2 :0.58
+-------------------------------------------------------
+-------------------------------------------------------
+# LSTM : 128
+# BATCH : 256
+LR : 1e-5
+iteration 0, loss 0.67
+iteration 5, loss 0.55
+iteration 10, loss 0.47
+iteration 15, loss 0.49
+iteration 20, loss 0.61
+iteration 25, loss 0.82
+iteration 30, loss 0.85
+iteration 35, loss 0.79
+iteration 40, loss 0.63
+iteration 45, loss 0.65
+task : Aotizhongxin, RMSE : 0.25, MAE :0.28, R2 :0.63
+task : Changping, RMSE : 0.24, MAE :0.27, R2 :0.60
+task : Dingling, RMSE : 0.20, MAE :0.24, R2 :0.68
+task : Dongsi, RMSE : 0.29, MAE :0.29, R2 :0.56
+task : Guanyuan, RMSE : 0.27, MAE :0.30, R2 :0.61
+task : Gucheng, RMSE : 0.30, MAE :0.29, R2 :0.57
+task : Huairou, RMSE : 0.21, MAE :0.25, R2 :0.61
+task : Nongzhanguan, RMSE : 0.24, MAE :0.28, R2 :0.61
+task : Shunyi, RMSE : 0.26, MAE :0.28, R2 :0.59
+task : Tiantan, RMSE : 0.25, MAE :0.29, R2 :0.63
+task : Wanliu, RMSE : 0.22, MAE :0.26, R2 :0.67
+task : Wanshouxigong, RMSE : 0.28, MAE :0.30, R2 :0.61
+RMSE : 0.25, MAE :0.28, R2 :0.61
+-------------------------------------------------------
+-------------------------------------------------------
+# LSTM : 128
+# BATCH : 256
+LR : 3e-5
+iteration 0, loss 0.61
+iteration 5, loss 0.52
+iteration 10, loss 0.47
+iteration 15, loss 0.48
+iteration 20, loss 0.61
+iteration 25, loss 0.80
+iteration 30, loss 0.84
+iteration 35, loss 0.77
+iteration 40, loss 0.63
+iteration 45, loss 0.64
+task : Aotizhongxin, RMSE : 0.25, MAE :0.28, R2 :0.60
+task : Changping, RMSE : 0.25, MAE :0.27, R2 :0.59
+task : Dingling, RMSE : 0.21, MAE :0.24, R2 :0.67
+task : Dongsi, RMSE : 0.29, MAE :0.30, R2 :0.53
+task : Guanyuan, RMSE : 0.29, MAE :0.31, R2 :0.55
+task : Gucheng, RMSE : 0.31, MAE :0.30, R2 :0.54
+task : Huairou, RMSE : 0.22, MAE :0.26, R2 :0.58
+task : Nongzhanguan, RMSE : 0.24, MAE :0.28, R2 :0.61
+task : Shunyi, RMSE : 0.26, MAE :0.28, R2 :0.58
+task : Tiantan, RMSE : 0.25, MAE :0.29, R2 :0.62
+task : Wanliu, RMSE : 0.22, MAE :0.26, R2 :0.64
+task : Wanshouxigong, RMSE : 0.28, MAE :0.30, R2 :0.58
+RMSE : 0.26, MAE :0.28, R2 :0.59
+-------------------------------------------------------
+-------------------------------------------------------
+# LSTM : 128
+# BATCH : 256
+LR : 7e-5
+iteration 0, loss 0.59
+iteration 5, loss 0.51
+iteration 10, loss 0.47
+iteration 15, loss 0.48
+iteration 20, loss 0.60
+iteration 25, loss 0.80
+iteration 30, loss 0.84
+iteration 35, loss 0.78
+iteration 40, loss 0.63
+iteration 45, loss 0.64
+task : Aotizhongxin, RMSE : 0.25, MAE :0.28, R2 :0.61
+task : Changping, RMSE : 0.24, MAE :0.27, R2 :0.60
+task : Dingling, RMSE : 0.21, MAE :0.24, R2 :0.66
+task : Dongsi, RMSE : 0.28, MAE :0.30, R2 :0.55
+task : Guanyuan, RMSE : 0.28, MAE :0.30, R2 :0.58
+task : Gucheng, RMSE : 0.32, MAE :0.30, R2 :0.54
+task : Huairou, RMSE : 0.21, MAE :0.25, R2 :0.60
+task : Nongzhanguan, RMSE : 0.24, MAE :0.28, R2 :0.58
+task : Shunyi, RMSE : 0.26, MAE :0.28, R2 :0.58
+task : Tiantan, RMSE : 0.25, MAE :0.29, R2 :0.62
+task : Wanliu, RMSE : 0.23, MAE :0.26, R2 :0.62
+task : Wanshouxigong, RMSE : 0.28, MAE :0.30, R2 :0.58
+RMSE : 0.25, MAE :0.28, R2 :0.59
+-------------------------------------------------------
+-------------------------------------------------------
+# LSTM : 128
+# BATCH : 256
+LR : 10e-5
+iteration 0, loss 0.59
+iteration 5, loss 0.51
+iteration 10, loss 0.47
+iteration 15, loss 0.49
+iteration 20, loss 0.61
+iteration 25, loss 0.80
+iteration 30, loss 0.83
+iteration 35, loss 0.78
+iteration 40, loss 0.63
+iteration 45, loss 0.64
+task : Aotizhongxin, RMSE : 0.25, MAE :0.28, R2 :0.60
+task : Changping, RMSE : 0.25, MAE :0.27, R2 :0.59
+task : Dingling, RMSE : 0.20, MAE :0.24, R2 :0.68
+task : Dongsi, RMSE : 0.28, MAE :0.30, R2 :0.56
+task : Guanyuan, RMSE : 0.28, MAE :0.30, R2 :0.57
+task : Gucheng, RMSE : 0.30, MAE :0.30, R2 :0.57
+task : Huairou, RMSE : 0.22, MAE :0.26, R2 :0.59
+task : Nongzhanguan, RMSE : 0.24, MAE :0.29, R2 :0.58
+task : Shunyi, RMSE : 0.26, MAE :0.28, R2 :0.59
+task : Tiantan, RMSE : 0.25, MAE :0.29, R2 :0.61
+task : Wanliu, RMSE : 0.23, MAE :0.27, R2 :0.60
+task : Wanshouxigong, RMSE : 0.28, MAE :0.30, R2 :0.57
+RMSE : 0.25, MAE :0.28, R2 :0.59
+-------------------------------------------------------
