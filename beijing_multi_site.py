@@ -7,6 +7,7 @@ import optax
 from flax import linen as nn
 from functools import partial
 from sklearn import metrics
+import sys 
 
 def get_dataloader(X,y,batch_size,key,axis=0):
     num_train=X.shape[axis]
@@ -81,6 +82,12 @@ def sgld(key,log_post, grad_log_post, num_samples,
             print('iteration {0}, loss {1:.2f}'.format(i,loss[-1]))
     return samples,loss
 
+
+# read arguments
+print('-------------------------------------------------------')
+print("# LSTM :", sys.argv[1])
+
+
 # read data
 path = 'data/PRSA_Data_20130301-20170228/'
 csv_files = glob.glob(path + "/*.csv")
@@ -121,14 +128,14 @@ class LSTM(nn.Module):
     @nn.compact   
     def __call__(self, X_batch):
         carry,x=nn.RNN(nn.LSTMCell(self.features),return_carry=True)(X_batch)
-        #carry,x=nn.RNN(nn.LSTMCell(self.features),return_carry=True)(x)
+        carry,x=nn.RNN(nn.LSTMCell(self.features),return_carry=True)(x)
         x=nn.Dense(self.output)(x)
         return x[:,-1,:]
 
 key=jax.random.PRNGKey(0)
 key_model,key_data=jax.random.split(key,2)
 batch_size=256
-model=LSTM(32,future)
+model=LSTM(int(sys.argv[1]),future)
 n_groups=X_train_datasets.shape[0]
 inputs = jax.random.randint(key,(batch_size,past,1),0, 10,).astype(jnp.float32)
 key_tasks=jax.random.split(key_model,n_groups)
@@ -153,5 +160,6 @@ for i in range(n_groups):
     rmse_metric.append(rmse)
     mae_metric.append(mae)
     print('task : {0}, RMSE : {1:1.2f}, MAE :{2:1.2f}, R2 :{3:1.2f}'.format(dataset_names[i],rmse,mae,r_squared))
-print('-------------------------------------------------------')
+
 print('RMSE : {0:1.2f}, MAE :{1:1.2f}, R2 :{2:1.2f}'.format(np.mean(rmse_metric),np.mean(mae_metric),np.mean(r_metric)))
+print('-------------------------------------------------------')
