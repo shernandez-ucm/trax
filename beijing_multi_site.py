@@ -86,7 +86,8 @@ def sgld(key,log_post, grad_log_post, num_samples,
 # read arguments
 print('-------------------------------------------------------')
 print("# LSTM :", sys.argv[1])
-
+print("# BATCH :", sys.argv[2])
+print("LR :", sys.argv[3])
 
 # read data
 path = 'data/PRSA_Data_20130301-20170228/'
@@ -128,26 +129,26 @@ class LSTM(nn.Module):
     @nn.compact   
     def __call__(self, X_batch):
         carry,x=nn.RNN(nn.LSTMCell(self.features),return_carry=True)(X_batch)
-        carry,x=nn.RNN(nn.LSTMCell(self.features),return_carry=True)(x)
+        #carry,x=nn.RNN(nn.LSTMCell(self.features//2),return_carry=True)(x)
         x=nn.Dense(self.output)(x)
         return x[:,-1,:]
 
-key=jax.random.PRNGKey(0)
+key=jax.random.PRNGKey(32)
 key_model,key_data=jax.random.split(key,2)
-batch_size=256
+batch_size=int(sys.argv[2])
 model=LSTM(int(sys.argv[1]),future)
 n_groups=X_train_datasets.shape[0]
 inputs = jax.random.randint(key,(batch_size,past,1),0, 10,).astype(jnp.float32)
 key_tasks=jax.random.split(key_model,n_groups)
 params_tasks = jax.vmap(model.init, (0, None))(key_tasks, inputs)
-dt=1e-5
+dt=float(sys.argv[3])
 grad_log_post=jax.jit(jax.grad(log_likelihood))
 samples,loss=sgld(key_data,log_likelihood, grad_log_post, 50,
                              dt, params_tasks,X_train_datasets,y_train_datasets,
                              batch_size,test_data=None)
 
 X_test=X_test_datasets[:,:,:,np.newaxis]
-params=samples[35]
+params=samples[-1]
 preds=jax.vmap(model.apply, (0, 0))(params, X_test)
 r_metric=list()
 rmse_metric=list()
