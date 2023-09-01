@@ -57,6 +57,7 @@ def sgld_kernel_momemtum(key, params, momemtum,grad_log_post, dt, X, y_data):
     gamma,eps=0.9,1e-6
     key, subkey = jax.random.split(key, 2)
     grads = grad_log_post(params, X, y_data)
+    norm_grads=jax.tree_map(lambda g: g/jnp.linalg.norm(g),grads)
     squared_grads=jax.tree_map(lambda g: jnp.square(g),grads)
     momemtum=jax.tree_map(lambda m,s : gamma*m+(1-gamma)*s,momemtum,squared_grads)
     noise=jax.tree_map(lambda p: jax.random.normal(key=subkey,shape=p.shape), params)
