@@ -8,6 +8,7 @@ from flax import linen as nn
 from functools import partial
 from sklearn import metrics
 import sys 
+import distrax
 
 def get_dataloader(X,y,batch_size,key,axis=0):
     num_train=X.shape[axis]
@@ -45,10 +46,33 @@ def create_batch_multistep(df,lag,future,feature=None):
     y=df_future.values
     return X,y
 
+def reparameterize(params):
+    mu = params['mu']
+    sigma = jax.tree_map(lambda p : jnp.exp(0.5*p),params['log_std'])
+    eps = params['eps']
+    #eps=jax.tree_map(lambda p: jax.random.normal(key=jax.random.PRNGKey(np.random.randint(42)),shape=p.shape), params['eps'])
+    model_params = jax.tree_map(lambda m,e,s : m+e*s,mu,eps,sigma)
+    return model_params
 
 def log_likelihood(params, x, y):
-    preds = jax.vmap(model.apply, (0, 0))(params, jnp.array(x))
-    return jnp.mean(optax.l2_loss(y,preds).sum(axis=-1))
+    model_params=reparameterize(params)
+    preds = jax.vmap(model.apply, (0, 0))(model_params, jnp.array(x))
+    return jnp.mean(optax.l2_loss(y,preds).sum(axis=1))
+
+def log_prior(params):
+    def flatten(params):
+        squared=jax.tree_map(lambda p: distrax.Normal(0.0,10.0).log_prob(p).sum(), params)
+        flattten_squared=jnp.sum(jnp.stack(jax.tree_util.tree_leaves(squared['params'])))
+        return flattten_squared
+    squared_mu=flatten(params['mu'])
+    squared_noise=flatten(params['eps'])
+    squared_std=flatten(params['log_std'])
+    return squared_std+squared_noise+squared_mu
+
+def log_post(params,batch,labels):
+    n_data=batch.shape[0]
+    return -1./n_data*log_prior(params) + log_likelihood(params,batch,labels)
+
 
 @partial(jax.jit, static_argnums=(3,4))
 def sgld_kernel_momemtum(key, params, momemtum,grad_log_post, dt, X, y_data):
@@ -133,7 +157,6 @@ class LSTM(nn.Module):
     @nn.compact   
     def __call__(self, X_batch):
         carry,x=nn.RNN(nn.LSTMCell(self.features),return_carry=True)(X_batch)
-        #carry,x=nn.RNN(nn.OptimizedLSTMCell(self.features),return_carry=True)(X_batch)
         x=nn.Dense(self.output)(x)
         return x[:,-1,:]
 
@@ -144,17 +167,42 @@ model=LSTM(int(sys.argv[1]),future)
 n_groups=X_train_datasets.shape[0]
 features=len(feature_keys)
 inputs = jax.random.randint(key,(batch_size,past,features),0, 10,).astype(jnp.float32)
-key_tasks=jax.random.split(key_model,n_groups)
-params_tasks = jax.vmap(model.init, (0, None))(key_tasks, inputs)
+
+
+key_model_init, key_state_init = jax.random.split(key_model, 2)
+key_params_mu,key_params_sigma,key_params_eps=jax.random.split(key_model_init,3)
+key_tasks=jax.random.split(key_params_eps,n_groups)
+
+params_noise = jax.vmap(model.init, (0, None))(key_tasks, inputs)
+params_mu=model.init(key_params_mu,inputs)
+params_sigma=jax.tree_map(lambda p: distrax.Normal(0.0,1.0).sample(seed=key_params_sigma,sample_shape=(1,)),params_mu)
+
+
+params_pooled = {
+        'mu': params_mu,
+        'eps': params_noise,
+        'log_std': params_sigma,
+    }
+
+model_params=reparameterize(params_pooled)
+batch_inputs = jax.random.randint(key_data,(n_groups,batch_size,past,features),0, 10,).astype(jnp.float32)
+preds = jax.vmap(model.apply, (0, 0))(model_params, batch_inputs)
+
+
 dt=float(sys.argv[3])
-grad_log_post=jax.jit(jax.grad(log_likelihood))
+grad_log_post=jax.jit(jax.grad(log_post))
+
+
+
 samples,loss=sgld(key_data,log_likelihood, grad_log_post, 50,
-                             dt, params_tasks,X_train_datasets,y_train_datasets,
+                             dt, params_pooled,X_train_datasets,y_train_datasets,
                              batch_size,test_data=None)
 
 X_test=X_test_datasets
 params=samples[-1]
-preds=jax.vmap(model.apply, (0, 0))(params, X_test)
+model_params=reparameterize(samples[-1])
+preds=jax.vmap(model.apply, (0, 0))(model_params, X_test)
+
 r_metric=list()
 rmse_metric=list()
 mae_metric=list()
