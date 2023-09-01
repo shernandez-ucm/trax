@@ -15,7 +15,7 @@ def get_dataloader(X,y,batch_size,key,axis=0):
     indices=jax.random.permutation(key,indices)
     for i in range(0, len(indices),batch_size):
         batch_indices = jnp.array(indices[i: i+batch_size])
-        yield X[:,batch_indices,:], y[:,batch_indices]
+        yield X[:,batch_indices,:,:], y[:,batch_indices]
 
 def pre_process(df):
     df['date_time']=pd.to_datetime(df[['year', 'month', 'day','hour']])
@@ -33,20 +33,18 @@ def train_test_split(data,split_fraction,feature_keys):
     val_data = data.iloc[train_split:]
     return train_data,val_data
 
-def create_batch(data,lag,future):
-    df_lag=pd.concat([data[:-future].shift(i) for i in range(lag-1,-1,-1)],axis=1).dropna()
-    #df_lag.columns=['pm_'+str(i) for i in range(lag,-1,1)]
-    X=df_lag.values
-    y=data[future+lag-1:].values
-    return X,y
-
-def create_batch_multistep(data,lag,future):
+def create_batch_multistep(df,lag,future,feature=None):
+    if feature is None:
+        data=df
+    else:
+        data=df[feature]
     df_lag=pd.concat([data[:-future].shift(i) for i in range(lag-1,-1,-1)],axis=1).dropna()
     df_future=pd.concat([data[lag-1:].shift(-i) for i in range(1,future+1)],axis=1).dropna()
     #df_lag.columns=['pm_'+str(i) for i in range(lag,-1,1)]
     X=df_lag.values
     y=df_future.values
     return X,y
+
 
 def log_likelihood(params, x, y):
     preds = jax.vmap(model.apply, (0, 0))(params, jnp.array(x[:,:,:,np.newaxis]))
@@ -97,9 +95,8 @@ df_list = [pd.read_csv(file) for file in csv_files]
 df_preprocessed=[pre_process(df) for df in df_list]
 df_group=pd.concat(df_preprocessed)
 
-# create train test datasets
 split_fraction = 0.8
-feature_keys = ['PM2.5']
+feature_keys = ['PM2.5','TEMP','PRES','DEWP','RAIN']
 X_train_datasets=list()
 y_train_datasets=list()
 X_test_datasets=list()
@@ -109,13 +106,19 @@ past=6
 dataset_names=list()
 for item_id, gdf in df_group.groupby('station'):
     gdf.fillna(method='ffill',inplace=True)
-    train,test=train_test_split(gdf,split_fraction,['PM2.5'])
-    X_train,y_train=create_batch_multistep(train,past,future)
-    X_test,y_test=create_batch_multistep(test,past,future)
-    X_train_datasets.append(X_train)
-    y_train_datasets.append(y_train)
-    X_test_datasets.append(X_test)
-    y_test_datasets.append(y_test)
+    train,test=train_test_split(gdf,split_fraction,feature_keys)
+    train_multi_feature=list()
+    test_multi_feature=list()
+    for feature in feature_keys:
+        X_train,y_train=create_batch_multistep(train,past,future,feature)
+        X_test,y_test=create_batch_multistep(test,past,future,feature)
+        train_multi_feature.append(X_train)
+        test_multi_feature.append(X_test)
+        if feature=='PM2.5':
+            y_train_datasets.append(y_train)
+            y_test_datasets.append(y_test)
+    X_train_datasets.append(np.stack(train_multi_feature,axis=-1))
+    X_test_datasets.append(np.stack(test_multi_feature,axis=-1))
     dataset_names.append(item_id)
 X_train_datasets=np.stack(X_train_datasets,axis=0)
 y_train_datasets=np.stack(y_train_datasets,axis=0)
@@ -138,7 +141,8 @@ key_model,key_data=jax.random.split(key,2)
 batch_size=int(sys.argv[2])
 model=LSTM(int(sys.argv[1]),future)
 n_groups=X_train_datasets.shape[0]
-inputs = jax.random.randint(key,(batch_size,past,1),0, 10,).astype(jnp.float32)
+features=len(feature_keys)
+inputs = jax.random.randint(key,(batch_size,past,features),0, 10,).astype(jnp.float32)
 key_tasks=jax.random.split(key_model,n_groups)
 params_tasks = jax.vmap(model.init, (0, None))(key_tasks, inputs)
 dt=float(sys.argv[3])
@@ -147,7 +151,7 @@ samples,loss=sgld(key_data,log_likelihood, grad_log_post, 50,
                              dt, params_tasks,X_train_datasets,y_train_datasets,
                              batch_size,test_data=None)
 
-X_test=X_test_datasets[:,:,:,np.newaxis]
+X_test=X_test_datasets
 params=samples[-1]
 preds=jax.vmap(model.apply, (0, 0))(params, X_test)
 r_metric=list()
