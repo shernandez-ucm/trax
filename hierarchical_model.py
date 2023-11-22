@@ -191,7 +191,7 @@ def reparameterize(params):
 def log_likelihood(params, x, y):
     model_params=reparameterize(params)
     preds = jax.vmap(model.apply, (0, 0))(model_params, jnp.array(x))
-    sigmas = jax.vmap(model.apply, (None, 0))(params['log_aleatoric'], jnp.array(x))
+    sigmas = jax.vmap(model.apply, (None, 0))(params['log_std'], jnp.array(x))
     sigmas=jax.tree_map(lambda p: jax.nn.softplus(p),sigmas)
     return -1.0*jnp.mean(distrax.Normal(preds,sigmas).log_prob(y).sum(axis=-1))
     #return (jnp.mean(optax.l2_loss(y,preds).sum(axis=1)))
@@ -297,8 +297,6 @@ params_mu=model.init(key_params_mu,inputs)
 
 params_sigma=model.init(key_params_sigma,inputs)
 params_aleatoric=model.init(key_params_aleatoric,inputs)
-params_sigma=jax.tree_map(lambda p: jax.nn.softplus(p),params_sigma)
-params_aleatoric=jax.tree_map(lambda p: jax.nn.softplus(p),params_aleatoric)
 #jax.tree_map(lambda p: distrax.Normal(0.0,1.0).sample(seed=key_params_sigma,sample_shape=(1,)),params_mu)
 
 
