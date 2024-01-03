@@ -29,24 +29,24 @@ def make_precon(smp, scr, pre='id'):
     # Select preconditioner
     m = 1000
     if pre == 'id':
-        linv = np.identity(dm)
+        linv = np.identity(dm,dtype=smp.dtype)
     elif pre == 'med':
         m2 = med2(m)
         if m2 == 0:
             raise Exception('Too few unique samples in smp.')
-        linv = inv(m2 * np.identity(dm))
+        linv = inv(m2 * np.identity(dm,dtype=smp.dtype))
     elif pre == 'sclmed':
         m2 = med2(m)
         if m2 == 0:
             raise Exception('Too few unique samples in smp.')
-        linv = inv(m2 / np.log(np.minimum(m, sz)) * np.identity(dm))
+        linv = inv(m2 / np.log(np.minimum(m, sz)) * np.identity(dm,dtype=smp.dtype))
     elif pre == 'smpcov':
         c = np.cov(smp, rowvar=False)
         if not all(eig(c)[0] > 0):
             raise Exception('Too few unique samples in smp.')
         linv = inv(c)
     elif isfloat(pre):
-        linv = inv(float(pre) * np.identity(dm))
+        linv = inv(float(pre) * np.identity(dm,dtype=smp.dtype))
     else:
         raise ValueError('Incorrect preconditioner type.')
     return linv
