@@ -1,3 +1,6 @@
 __pycache__/
 data/HAR
 
+sgld.samples
+federated_sgld.samples
+sgld.samples
